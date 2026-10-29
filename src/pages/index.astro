@@ -1,0 +1,31 @@
+---
+import Page from '../layouts/Page.astro';
+import Hero from '../components/Hero.astro';
+import RouteMap from '../components/RouteMap.astro';
+import StopCard from '../components/StopCard.astro';
+import { pins } from '../data/route';
+import { stop } from '../data/routeCopy';
+import { ui_for } from '../i18n/ui';
+
+const t = ui_for('es');
+const pins_ = pins.map((p) => ({ ...p, ...stop('es', p.id) }));
+---
+
+<Page lang="es" title={t['site.title']} description={t['site.description']}>
+  <Hero lang="es" />
+  <h2 id="ruta">Ruta</h2>
+  <section aria-labelledby="ruta" class="py-10">
+    <RouteMap lang="es" />
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {pins_.map((p) => <StopCard id={p.id} kind={p.kind} place={p.place} title={p.title} body={p.body} lang="es" />)}
+    </div>
+  </section>
+  <h2 id="taller">Taller</h2>
+  <section id="taller" class="py-10">
+    <p class="text-[var(--ink)]/70">Aquí irán los proyectos (VoxLab, Waresis, go-storage, ManualGestor, PythonSurveyAnalizer, TEDx, club).</p>
+  </section>
+  <h2 id="cajuela">Cajuela</h2>
+  <section id="cajuela" class="py-10">
+    <p class="text-[var(--ink)]/70">Postales de mentores y compañeros. Se rellena en build desde JSON.</p>
+  </section>
+</Page>

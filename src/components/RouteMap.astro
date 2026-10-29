@@ -1,0 +1,62 @@
+---
+import { pins } from '../data/route';
+import { stop } from '../data/routeCopy';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'es' } = Astro.props;
+---
+
+<!-- Mapa estilizado de la ruta: León → Managua → en línea. Sin tiles, sin JS pesado. -->
+<figure class="m-0">
+  <svg
+    viewBox="0 0 100 100"
+    role="img"
+    aria-label={lang === 'es' ? 'Mapa de la ruta de mi carrera con paradas y miradores' : 'Career route map with stops and lookouts'}
+    class="h-auto w-full rounded-[var(--radius-m)] bg-[var(--paper-deep)] shadow-card"
+  >
+    <defs>
+      <marker id="route-end" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+        <circle cx="3" cy="3" r="2" fill="var(--route)"></circle>
+      </marker>
+    </defs>
+    <polyline
+      points={pins.map((p) => `${p.x},${p.y}`).join(' ')}
+      fill="none"
+      stroke="var(--route)"
+      stroke-width="0.6"
+      stroke-dasharray="2 1.4"
+      marker-end="url(#route-end)"
+      opacity="0.9"></polyline>
+
+    {
+      pins.map((p) => (
+        <g>
+          <circle cx={p.x} cy={p.y} r="1.7" fill={p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)'} />
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r="2.5"
+            fill="none"
+            stroke={p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)'}
+            stroke-width="0.3"
+            opacity="0.5"
+          />
+          <text x={p.x + 3.2} y={p.y + 0.9} font-size="2.4" fill="var(--ink)" font-family="IBM Plex Mono, monospace">
+            {p.place}
+          </text>
+        </g>
+      ))
+    }
+
+    <text x="4" y="94" font-size="2.2" fill="var(--ink-soft)" font-family="IBM Plex Mono, monospace">
+      León · 12.43° N, 86.88° W → Managua · 12.13° N, 86.25° W → online
+    </text>
+  </svg>
+  <figcaption class="sr-only">
+    {lang === 'es' ? 'Mapa con las paradas de la carrera desde León hasta el trabajo en línea.' : 'Career map from León to online work.'}
+  </figcaption>
+</figure>

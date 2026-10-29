@@ -1,0 +1,22 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+---
+
+<Base {lang} {title} {description}>
+  <Header {lang} />
+  <main id="main" class="mx-auto max-w-4xl px-4">
+    <slot />
+  </main>
+  <Footer {lang} />
+</Base>

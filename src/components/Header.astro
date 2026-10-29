@@ -1,0 +1,44 @@
+---
+import { ui_for, localePath, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = ui_for(lang);
+const other: Locale = lang === 'es' ? 'en' : 'es';
+const links = [
+  { href: localePath[lang], label: lang === 'es' ? 'inicio' : 'home' },
+  { href: `${localePath[lang]}#ruta`, label: 'ruta' },
+  { href: `${localePath[lang]}#taller`, label: lang === 'es' ? 'taller' : 'work' },
+  { href: `${localePath[lang]}#cajuela`, label: 'cajuela' },
+];
+---
+
+<header class="border-b border-[var(--ink-soft)]">
+  <nav aria-label={lang === 'es' ? 'principal' : 'main'} class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
+    <a href={localePath[lang]} class="text-lg font-bold no-underline">Andrés Sánchez</a>
+    <ul class="flex items-center gap-4">
+      {
+        links.map((l) => (
+          <li>
+            <a class="text-sm no-underline hover:text-[var(--route)]" href={l.href}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href={localePath[other]}
+          hreflang={other}
+          aria-label={lang === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
+          class="rounded border border-[var(--ink-soft)] px-2 py-1 font-[var(--font-mono)] text-xs no-underline hover:bg-[var(--paper-deep)]"
+        >
+          {t['lang.toggle']}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

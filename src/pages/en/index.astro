@@ -1,0 +1,31 @@
+---
+import Page from '../../layouts/Page.astro';
+import Hero from '../../components/Hero.astro';
+import RouteMap from '../../components/RouteMap.astro';
+import StopCard from '../../components/StopCard.astro';
+import { pins } from '../../data/route';
+import { stop } from '../../data/routeCopy';
+import { ui_for } from '../../i18n/ui';
+
+const t = ui_for('en');
+const pins_ = pins.map((p) => ({ ...p, ...stop('en', p.id) }));
+---
+
+<Page lang="en" title={t['site.title']} description={t['site.description']}>
+  <Hero lang="en" />
+  <h2 id="ruta">Route</h2>
+  <section aria-labelledby="ruta" class="py-10">
+    <RouteMap lang="en" />
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {pins_.map((p) => <StopCard id={p.id} kind={p.kind} place={p.place} title={p.title} body={p.body} lang="en" />)}
+    </div>
+  </section>
+  <h2 id="taller">Workshop</h2>
+  <section id="taller" class="py-10">
+    <p class="text-[var(--ink)]/70">Projects go here (VoxLab, Waresis, go-storage, ManualGestor, PythonSurveyAnalizer, TEDx, club).</p>
+  </section>
+  <h2 id="cajuela">Trunk</h2>
+  <section id="cajuela" class="py-10">
+    <p class="text-[var(--ink)]/70">Postcards from mentors and peers. Filled at build time from JSON.</p>
+  </section>
+</Page>

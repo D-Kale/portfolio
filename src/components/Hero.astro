@@ -1,0 +1,65 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const es = lang === 'es';
+---
+
+<section
+  id="hero"
+  class="mx-auto grid max-w-4xl gap-8 px-4 py-[var(--space-l)] md:grid-cols-[2fr_1fr] md:items-center"
+>
+  <div>
+    <p class="font-[var(--font-mono)] text-xs uppercase tracking-wide text-[var(--jungle)]">
+      {es ? 'Ingeniería en Cibernética Electrónica · ULSA León' : 'Cybernetic Electronic Engineering · ULSA, León'}
+    </p>
+    <h1 class="mt-3 text-4xl font-extrabold md:text-6xl">
+      {es
+        ? 'Brego sistemas modernos y comunidades que aprenden.'
+        : 'I build modern systems and communities that learn.'}
+    </h1>
+    <p class="mt-4 max-w-prose text-lg">
+      {
+        es
+          ? 'Soy Andrés Sánchez, desarrollador full-stack en León, Nicaragua. Go y Astro son mis herramientas diarias: no vivo sin Docker ni sin un VPS con nginx y GitHub Actions que me hacen un deploy limpio. Diseño arquitectura y me duele el detalle de la interfaz.'
+          : 'I’m Andrés Sánchez, a full-stack developer from León, Nicaragua. Go and Astro are my daily tools: no Docker, no VPS with nginx and GitHub Actions doing clean deploys. I design architecture and care about interface details.'
+      }
+    </p>
+    <p class="mt-2 text-sm text-[var(--ink)]/80">
+      {
+        es
+          ? 'Escribo sobre backend y arquitectura; guío estudiantes de universitarios como mentor en Boreal Labs y en mi propio Programming Club.'
+          : 'I write about backend and architecture; I teach university students as mentor in Boreal Labs and in my own Programming Club.'
+      }
+    </p>
+    <div class="mt-6 flex gap-3">
+      <a
+        href="mailto:a3235633@gmail.com"
+        aria-label={es ? 'Enviar un correo a Andrés' : 'Email Andrés'}
+        class="rounded-[var(--radius-s)] bg-[var(--ink)] px-4 py-2 text-[var(--paper)] no-underline hover:bg-[var(--route)]"
+        >
+        {es ? 'Escribíme' : 'Email me'}
+      </a>
+      <a
+        href="https://github.com/D-Kale"
+        aria-label="GitHub de Andrés"
+        class="rounded-[var(--radius-s)] border border-[var(--ink)] px-4 py-2 no-underline hover:bg-[var(--paper-deep)]"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+  <div class="mx-auto w-48 md:w-full">
+    <img
+      src="/assets/placeholders/portrait.svg"
+      alt={es ? 'Retrato pendiente: subir a assets/portrait.jpg' : 'Portrait pending: upload to assets/portrait.jpg'}
+      width="320"
+      height="400"
+      loading="eager"
+      decoding="async"
+      class="w-full rounded-[var(--radius-m)] shadow-card"
+    />
+  </div>
+</section>

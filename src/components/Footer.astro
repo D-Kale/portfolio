@@ -1,0 +1,25 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const year = new Date().getFullYear();
+const contact = lang === 'es' ? 'Contacto' : 'Contact';
+const line =
+  lang === 'es'
+    ? 'Hecho en León, Nicaragua · Construyo sistemas y comunidades que aprenden.'
+    : 'Made in León, Nicaragua · I build systems and communities that learn.';
+---
+
+<footer class="mt-[var(--space-xl)] border-t border-[var(--ink-soft)] py-[var(--space-l)]">
+  <div class="mx-auto max-w-4xl px-4">
+    <p class="font-[var(--font-mono)] text-xs text-[var(--ink)]/70">{line}</p>
+    <p class="text-xs">
+      © {year} Andrés Sánchez ·
+      <a class="underline" href="mailto:a3235633@gmail.com">{contact}</a> ·
+      <a class="underline" href="https://github.com/D-Kale" rel="me">GitHub</a> ·
+      <a class="underline" href="https://ni.linkedin.com/in/andressanchezsf" rel="me">LinkedIn</a>
+    </p>
+  </div>
+</footer>
