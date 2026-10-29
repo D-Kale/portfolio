@@ -3,29 +3,40 @@ import Page from '../../layouts/Page.astro';
 import Hero from '../../components/Hero.astro';
 import RouteMap from '../../components/RouteMap.astro';
 import StopCard from '../../components/StopCard.astro';
+import Workshop from '../../components/Workshop.astro';
+import CommunityEducation from '../../components/CommunityEducation.astro';
+import Cajuela from '../../components/Cajuela.astro';
 import { pins } from '../../data/route';
-import { stop } from '../../data/routeCopy';
+import { stop, routeCopy } from '../../data/routeCopy';
 import { ui_for } from '../../i18n/ui';
 
 const t = ui_for('en');
-const pins_ = pins.map((p) => ({ ...p, ...stop('en', p.id) }));
+const cards = pins.map((p) => ({ ...p, ...stop('en', p.id) }));
 ---
 
 <Page lang="en" title={t['site.title']} description={t['site.description']}>
   <Hero lang="en" />
-  <h2 id="ruta">Route</h2>
-  <section aria-labelledby="ruta" class="py-10">
-    <RouteMap lang="en" />
+
+  <section id="ruta" class="mt-[var(--space-l)]" aria-labelledby="ruta-title">
+    <h2 id="ruta-title" class="text-3xl font-bold">{routeCopy['en']['ruta.title']}</h2>
+    <p class="mt-2 max-w-prose text-sm text-[var(--ink)]/80">{routeCopy['en']['ruta.intro']}</p>
+    <div class="mt-6">
+      <RouteMap lang="en" />
+    </div>
+    <p class="mt-4 flex flex-wrap gap-4 font-[var(--font-mono)] text-[11px] uppercase tracking-wide">
+      <span class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-full bg-[var(--route)]"></span>{routeCopy['en']['ruta.legenda.parada']}</span>
+      <span class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-full bg-[var(--jungle)]"></span>{routeCopy['en']['ruta.legenda.mirador']}</span>
+    </p>
     <div class="mt-6 grid gap-4 md:grid-cols-2">
-      {pins_.map((p) => <StopCard id={p.id} kind={p.kind} place={p.place} title={p.title} body={p.body} lang="en" />)}
+      {cards.map((c) => <StopCard id={c.id} kind={c.kind} place={c.place} title={c.title} body={c.body} lang="en" />)}
     </div>
   </section>
-  <h2 id="taller">Workshop</h2>
-  <section id="taller" class="py-10">
-    <p class="text-[var(--ink)]/70">Projects go here (VoxLab, Waresis, go-storage, ManualGestor, PythonSurveyAnalizer, TEDx, club).</p>
+
+  <section id="taller" class="mt-[var(--space-xl)]" aria-labelledby="taller-title">
+    <h2 id="taller-title" class="text-3xl font-bold">The workshop</h2>
+    <Workshop lang="en" />
   </section>
-  <h2 id="cajuela">Trunk</h2>
-  <section id="cajuela" class="py-10">
-    <p class="text-[var(--ink)]/70">Postcards from mentors and peers. Filled at build time from JSON.</p>
-  </section>
+
+  <CommunityEducation lang="en" />
+  <Cajuela lang="en" />
 </Page>

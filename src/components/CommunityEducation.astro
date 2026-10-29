@@ -1,0 +1,52 @@
+---
+import { community, formation } from '../data/community';
+import { pick } from '../data/community';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+---
+
+<section
+  id="comunidad"
+  class="mt-[var(--space-xl)]"
+  aria-labelledby="comunidad-title"
+>
+  <h2 id="comunidad-title" class="text-3xl font-bold">{lang === 'es' ? 'Comunidad' : 'Community'}</h2>
+  <ul class="mt-6 grid gap-4 md:grid-cols-2">
+    {
+      community.map((c) => (
+        <li class="rounded-[var(--radius-m)] border border-[var(--ink-soft)] bg-white p-5 shadow-card">
+          <h3 class="text-lg font-bold">{c.title[lang]}</h3>
+          <p class="mt-2 text-sm">{c.summary[lang]}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-[var(--space-l)]" aria-labelledby="formacion-title">
+    <h2 id="formacion-title" class="text-3xl font-bold">{lang === 'es' ? 'Formación' : 'Education'}</h2>
+    <ul class="mt-6 grid gap-4 md:grid-cols-2">
+      {
+        formation.map((f) => (
+          <li class="rounded-[var(--radius-m)] border border-[var(--ink-soft)] bg-white p-5 shadow-card">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-lg font-bold">{f.title[lang]}</h3>
+              {f.status && (
+                <span
+                  class="shrink-0 rounded-full bg-[var(--paper-deep)] px-3 py-1 font-[var(--font-mono)] text-[11px]"
+                  aria-label={f.status[lang]}
+                >
+                  {pick(lang, f.status)}
+                </span>
+              )}
+            </div>
+            <p class="mt-2 text-sm">{f.summary[lang]}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
