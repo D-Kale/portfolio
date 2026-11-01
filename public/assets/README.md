@@ -3,7 +3,7 @@
 Renombrado y clasificado tras revisar las 83 imagenes. Cada carpeta es un evento.
 El sitio resuelve las imagenes por estos nombres exactos; no inventar otros.
 
-**Total:** 82 imagenes - usar 41 / recortar 28 / descartar 13.
+**Total:** 91 imagenes - usar 47 / recortar 29 / descartar 15.
 
 | Veredicto | Que significa |
 |---|---|
@@ -137,4 +137,31 @@ _Descartadas (3):_ `igexport-DcXG6yIjopz-2.webp`, `igexport-DcXG6yIjopz-6.webp`,
 | `wordcamp/wordcamp-slide-wordpress-studio.webp` | Diapositiva 'Que es WordPress Studio' | square 1.0 | Comunidad | usar |
 
 _Descartadas (1):_ `igexport-Dd2gA8iDlkd-2.webp`
+
+## tedx
+
+| Archivo | Que muestra | Orientacion | Seccion | Veredicto |
+|---|---|---|---|---|
+| `tedx/landing-tedx.webp` | Landing del sitio del TEDx Avenida Bolivar que construi | landscape 2.03 | La ruta (parada) y Comunidad | usar |
+
+_Descartada (1):_ `tedx-escenario-aval-blivar.webp` (escenario del evento), ya no se publica.
+
+## logos
+
+Logotipos oficiales de instituciones y marcas. Cuando la tinta del logo es oscura (TEDx, Cisco, CS50, ULSA) se muestran sobre una placa clara (`--logo-plate`); los que ya son claros van directos sobre el fondo oscuro.
+
+| Archivo | Que muestra | Orientacion | Seccion | Veredicto |
+|---|---|---|---|---|
+| `logos/tedx-avenida-bolivar.webp` | Logotipo de TEDx Avenida Bolivar | landscape 2.9 | La ruta (parada) y Comunidad | usar |
+| `logos/cisco-networking-academy.webp` | Logotipo de Cisco Networking Academy | landscape 4.3 | Formacion | usar |
+| `logos/cs50.webp` | Logotipo de Harvard CS50 | landscape 2.0 | Formacion | usar |
+| `logos/aspire-institute.webp` | Logotipo de Aspire Institute | landscape 2.9 | Formacion | usar |
+
+## waresis
+
+| Archivo | Que muestra | Orientacion | Seccion | Veredicto |
+|---|---|---|---|---|
+| `waresis/waresis-mark.webp` | Marca "W" de Waresis | square 1.08 | El taller | usar |
+
+_Descartada (1):_ `waresis-full.png` (logotipo tipografico) llega cortado en los extremos del lienzo, asi que no se publica. El original queda en `assets-review/logos-source/`.
 

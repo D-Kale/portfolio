@@ -20,3 +20,7 @@ dist/
 
 # Recortes descartados del pipeline de imagenes (locales, fuera del deploy)
 assets-review/
+
+# Artefactos de revision visual (no son parte del sitio)
+playwright-mcp/
+critique-*.png

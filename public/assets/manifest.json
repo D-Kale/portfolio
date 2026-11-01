@@ -654,5 +654,77 @@
     "subject": "Campus de ULSA con fachada azul y palmera",
     "section": "formacion",
     "verdict": "use"
+  },
+  {
+    "event": "TEDx",
+    "original": "tedx/logo.png",
+    "renamed": "logos/tedx-avenida-bolivar.webp",
+    "subject": "Logotipo de TEDx Avenida Bolivar",
+    "section": "ruta-parada",
+    "verdict": "use"
+  },
+  {
+    "event": "Cisco",
+    "original": "CiscoNA.png",
+    "renamed": "logos/cisco-networking-academy.webp",
+    "subject": "Logotipo de Cisco Networking Academy",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "Harvard CS50",
+    "original": "CS50.png",
+    "renamed": "logos/cs50.webp",
+    "subject": "Logotipo de Harvard CS50",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "Aspire",
+    "original": "Aspire.png",
+    "renamed": "logos/aspire-institute.webp",
+    "subject": "Logotipo de Aspire Institute",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "Waresis",
+    "original": "waresis-full.png",
+    "renamed": null,
+    "subject": "Logotipo tipografico de Waresis, cortado en los extremos",
+    "section": "taller",
+    "verdict": "discard"
+  },
+  {
+    "event": "Waresis",
+    "original": "waresis-simple.png",
+    "renamed": "waresis/waresis-mark.webp",
+    "subject": "Marca W de Waresis",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "tedx",
+    "original": "tedx-escenario-aval-blivar.webp",
+    "renamed": null,
+    "subject": "Escenario del TEDx Avenida Bolivar",
+    "section": "comunidad",
+    "verdict": "discard"
+  },
+  {
+    "event": "TEDx",
+    "original": "landing-tedx.png",
+    "renamed": "tedx/landing-tedx.webp",
+    "subject": "Landing del sitio del TEDx Avenida Bolivar que construi",
+    "section": "ruta-parada",
+    "verdict": "use"
+  },
+  {
+    "event": "root",
+    "original": "1783702992142.png",
+    "renamed": "portrait.webp",
+    "subject": "Retrato de Andres reexportado en 4:5 a 800x1000",
+    "section": "hero",
+    "verdict": "crop"
   }
 ]
