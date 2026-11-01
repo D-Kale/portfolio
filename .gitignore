@@ -8,3 +8,15 @@ dist/
 .playwright-mcp/
 .atl/
 *.log
+
+# Agent tooling (not part of the site)
+.agent/
+.claude/
+.devin/
+.gemini/
+.impeccable/
+.opencode/
+
+
+# Recortes descartados del pipeline de imagenes (locales, fuera del deploy)
+assets-review/
