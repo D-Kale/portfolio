@@ -1,0 +1,27 @@
+---
+import { brandIconFor } from '../data/brands';
+
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 18 } = Astro.props;
+const icon = brandIconFor(name);
+---
+
+{
+  icon && (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      class="shrink-0"
+    >
+      <path d={icon.path} />
+    </svg>
+  )
+}

@@ -1,6 +1,6 @@
 ---
-import { pins } from '../data/route';
-import { stop } from '../data/routeCopy';
+import { pins, roadNodes, roadPath, roadNodeFractions, totalKm } from '../data/route';
+import { routeCopy } from '../data/routeCopy';
 import type { Locale } from '../i18n/ui';
 
 interface Props {
@@ -8,55 +8,293 @@ interface Props {
 }
 
 const { lang = 'es' } = Astro.props;
+const copy = routeCopy[lang];
+const es = lang === 'es';
+
+const PLATE_W = 420;
+const PLATE_H = 900;
+
+/** The road as one smooth SVG path (Catmull-Rom through the control points). */
+const d = roadPath();
+
+const kindLabel: Record<string, string> = {
+  parada: copy['ruta.legenda.parada'],
+  mirador: copy['ruta.legenda.mirador'],
+};
+
+interface Spot {
+  id: string;
+  kind: string;
+  short: string;
+  km: number;
+  accent: string;
+  index: number;
+  /** where the marker sits, in plate units */
+  x: number;
+  y: number;
+  /** where the road node is, in plate units */
+  nodeX: number;
+  nodeY: number;
+}
+
+/**
+ * Each milestone gets a numbered marker on the outer side of the curve, so the
+ * marker never sits on the asphalt and the truck keeps driving clean.
+ */
+const spots: Spot[] = pins.map((p, index) => {
+  const node = roadNodes[p.at];
+  const prev = roadNodes[Math.max(0, p.at - 1)];
+  const next = roadNodes[Math.min(roadNodes.length - 1, p.at + 1)];
+  const dx = next.x - prev.x;
+  const dy = next.y - prev.y;
+  const len = Math.hypot(dx, dy) || 1;
+  let nx = -dy / len;
+  let ny = dx / len;
+  if (nx * (node.x - PLATE_W / 2) < 0) {
+    nx = -nx;
+    ny = -ny;
+  }
+  const OFFSET = 40;
+  return {
+    id: p.id,
+    kind: p.kind,
+    short: p.short[lang],
+    km: p.km,
+    accent: p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)',
+    index: index + 1,
+    x: node.x + nx * OFFSET,
+    y: node.y + ny * OFFSET,
+    nodeX: node.x,
+    nodeY: node.y,
+  };
+});
+
+/** Arc length fraction of every milestone, used to sync the truck. */
+const milestoneFractions = pins.map((p) => roadNodeFractions[p.at]);
+
+/** Truck rest angle at the start of the road, so it is parked, not tilted. */
+const startAngle =
+  (Math.atan2(roadNodes[1].y - roadNodes[0].y, roadNodes[1].x - roadNodes[0].x) * 180) / Math.PI - 90;
 ---
 
-<!-- Mapa estilizado de la ruta: León → Managua → en línea. Sin tiles, sin JS pesado. -->
-<figure class="m-0">
-  <svg
-    viewBox="0 0 100 100"
-    role="img"
-    aria-label={lang === 'es' ? 'Mapa de la ruta de mi carrera con paradas y miradores' : 'Career route map with stops and lookouts'}
-    class="h-auto w-full rounded-[var(--radius-m)] bg-[var(--paper-deep)] shadow-card"
-  >
-    <defs>
-      <marker id="route-end" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
-        <circle cx="3" cy="3" r="2" fill="var(--route)"></circle>
-      </marker>
-    </defs>
-    <polyline
-      points={pins.map((p) => `${p.x},${p.y}`).join(' ')}
-      fill="none"
-      stroke="var(--route)"
-      stroke-width="0.6"
-      stroke-dasharray="2 1.4"
-      marker-end="url(#route-end)"
-      opacity="0.9"></polyline>
+<section
+  id="ruta"
+  class="ruta"
+  aria-labelledby="ruta-title"
+  data-ruta
+  data-fractions={JSON.stringify(milestoneFractions)}
+>
+  <div class="ruta-inner">
+    <header class="ruta-header">
+      <h2 id="ruta-title" class="ruta-title">{copy['ruta.title']}</h2>
+      <p id="ruta-intro" class="ruta-intro">{copy['ruta.intro']}</p>
+      <ul class="ruta-legend">
+        <li><span class="ruta-key" style="background:var(--route)"></span>{copy['ruta.legenda.parada']}</li>
+        <li><span class="ruta-key" style="background:var(--jungle)"></span>{copy['ruta.legenda.mirador']}</li>
+      </ul>
+    </header>
 
-    {
-      pins.map((p) => (
-        <g>
-          <circle cx={p.x} cy={p.y} r="1.7" fill={p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)'} />
-          <circle
-            cx={p.x}
-            cy={p.y}
-            r="2.5"
-            fill="none"
-            stroke={p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)'}
-            stroke-width="0.3"
-            opacity="0.5"
-          />
-          <text x={p.x + 3.2} y={p.y + 0.9} font-size="2.4" fill="var(--ink)" font-family="IBM Plex Mono, monospace">
-            {p.place}
-          </text>
-        </g>
-      ))
+    <div class="ruta-grid">
+      <div class="ruta-visual">
+        <div class="ruta-plate">
+          <svg viewBox={`0 0 ${PLATE_W} ${PLATE_H}`} role="img" aria-labelledby="ruta-road-title">
+            <title id="ruta-road-title">{es ? 'Carretera de la carrera' : 'Career highway'}</title>
+            <path class="ruta-road-shoulder" d={d} />
+            <path class="ruta-road-bed" d={d} />
+            <path class="ruta-road-dash" d={d} />
+            <path class="ruta-road-travel" d={d} />
+
+            {spots.map((s) => (
+              <line
+                class="ruta-road-tick"
+                x1={s.nodeX}
+                y1={s.nodeY}
+                x2={s.x}
+                y2={s.y}
+              />
+            ))}
+
+            <g
+              class="ruta-truck"
+              data-truck
+              aria-hidden="true"
+              transform={`translate(${roadNodes[0].x} ${roadNodes[0].y}) rotate(${startAngle}) scale(1.25)`}
+            >
+              <rect x="-13" y="-14" width="4.5" height="7" rx="1.6" fill="var(--ink-muted)" />
+              <rect x="8.5" y="-14" width="4.5" height="7" rx="1.6" fill="var(--ink-muted)" />
+              <rect x="-13" y="6" width="4.5" height="7" rx="1.6" fill="var(--ink-muted)" />
+              <rect x="8.5" y="6" width="4.5" height="7" rx="1.6" fill="var(--ink-muted)" />
+              <rect x="-10" y="-18" width="20" height="26" rx="3" fill="var(--surface-highest)" stroke="var(--ink)" stroke-width="1.6" />
+              <path d="M-9 8 H9 L7.5 20 H-7.5 Z" fill="var(--surface-high)" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round" />
+              <rect x="-7" y="9.5" width="14" height="4" rx="1.5" fill="var(--route)" />
+              <circle cx="-4" cy="18" r="1.6" fill="var(--route-hi)" />
+              <circle cx="4" cy="18" r="1.6" fill="var(--route-hi)" />
+            </g>
+
+            <g
+              class="ruta-flag"
+              aria-hidden="true"
+              transform={`translate(${roadNodes[roadNodes.length - 1].x} ${roadNodes[roadNodes.length - 1].y})`}
+            >
+              <path d="M0,0 V-26" stroke="var(--ink-soft)" stroke-width="2" stroke-linecap="round" />
+              <path d="M0,-26 L20,-20 L0,-14 Z" fill="var(--route)" />
+            </g>
+          </svg>
+
+          {spots.map((s) => (
+            <a
+              class="ruta-pin"
+              href={`#stop-${s.id}`}
+              data-pin={s.id}
+              style={`--pin-x:${(s.x / PLATE_W) * 100}%; --pin-y:${(s.y / PLATE_H) * 100}%; --pin-accent:${s.accent};`}
+              aria-label={`${s.short} · ${kindLabel[s.kind]} · km ${s.km}`}
+            >
+              <span class="ruta-pin-index">{s.index}</span>
+              <span class="ruta-pin-label">
+                <span class="ruta-pin-km">km {s.km}</span>
+                <span class="ruta-pin-name">{s.short}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <ol class="ruta-cards">
+        {pins.map((p, i) => (
+          <li class="ruta-stop" id={`stop-${p.id}`} data-stop={p.id} tabindex="-1">
+            <article class="ruta-card">
+              <div class="ruta-card-body">
+                <p class="ruta-card-kind">
+                  <span class="ruta-pin-index ruta-pin-index--static" style={`--pin-accent:${p.kind === 'parada' ? 'var(--route)' : 'var(--jungle)'}`}>
+                    {i + 1}
+                  </span>
+                  {kindLabel[p.kind]}
+                  <span class="ruta-card-km">km {p.km}</span>
+                </p>
+                <h3 class="ruta-card-title">{copy[`${p.id}.title` as const]}</h3>
+                <p class="ruta-card-place">{p.place[lang]}</p>
+                <p class="ruta-card-text">{copy[`${p.id}.body` as const]}</p>
+                {p.logo && (
+                  <img
+                    class="ruta-card-logo"
+                    src={p.logo}
+                    alt={p.logoAlt?.[lang] ?? ''}
+                    width="1200"
+                    height="263"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
+              {p.image && (
+                <img
+                  class="ruta-card-photo"
+                  src={p.image}
+                  alt={p.alt?.[lang] ?? ''}
+                  width="1400"
+                  height="1400"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </article>
+          </li>
+        ))}
+        <li class="ruta-stop ruta-stop--end">
+          <p class="ruta-end">
+            <span class="ruta-key" style="background:var(--route)"></span>
+            {es ? 'Fin de la ruta' : 'End of the route'}
+            <span class="ruta-card-km">km {totalKm}</span>
+          </p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-ruta]');
+
+  if (root) {
+    const path = root.querySelector<SVGPathElement>('.ruta-road-dash');
+    const travel = root.querySelector<SVGPathElement>('.ruta-road-travel');
+    const truck = root.querySelector<SVGGElement>('[data-truck]');
+    const cards = [...root.querySelectorAll<HTMLElement>('[data-stop]')];
+    const pins = [...root.querySelectorAll<HTMLElement>('[data-pin]')];
+    const fractions = JSON.parse(root.dataset.fractions ?? '[]') as number[];
+    const wide = window.matchMedia('(min-width: 1024px)');
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (path && travel && truck && cards.length === fractions.length) {
+      const total = path.getTotalLength();
+
+      /** Milestone anchors in document coordinates: card centre, road fraction. */
+      const anchors = () => [
+        { y: root.getBoundingClientRect().top + window.scrollY, f: 0 },
+        ...cards.map((el, i) => ({
+          y: el.getBoundingClientRect().top + window.scrollY + el.offsetHeight / 2,
+          f: fractions[i],
+        })),
+        {
+          y: cards[cards.length - 1].getBoundingClientRect().bottom + window.scrollY,
+          f: 1,
+        },
+      ];
+
+      /** Scroll position mapped to the fraction of road already driven. */
+      const driven = (list: { y: number; f: number }[], view: number) => {
+        if (view <= list[0].y) return list[0].f;
+        for (let i = 0; i < list.length - 1; i++) {
+          if (view < list[i + 1].y) {
+            const span = list[i + 1].y - list[i].y;
+            const t = span > 0 ? (view - list[i].y) / span : 0;
+            return list[i].f + (list[i + 1].f - list[i].f) * t;
+          }
+        }
+        return list[list.length - 1].f;
+      };
+
+      let queued = false;
+
+      const render = () => {
+        queued = false;
+        const list = anchors();
+        const view = window.scrollY + window.innerHeight * (wide.matches ? 0.5 : 0.66);
+        const length = driven(list, view) * total;
+
+        const point = path.getPointAtLength(length);
+        const ahead = path.getPointAtLength(Math.min(total, length + 1));
+        const angle = (Math.atan2(ahead.y - point.y, ahead.x - point.x) * 180) / Math.PI - 90;
+        truck.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${angle}) scale(1.25)`);
+        travel.style.strokeDasharray = `${length} ${total}`;
+
+        let active = 0;
+        let best = Infinity;
+        list.slice(1, -1).forEach((anchor, i) => {
+          const distance = Math.abs(anchor.y - view);
+          if (distance < best) {
+            best = distance;
+            active = i;
+          }
+        });
+        cards.forEach((el, i) => el.classList.toggle('is-active', i === active));
+        pins.forEach((el, i) => el.classList.toggle('is-active', i === active));
+      };
+
+      const onScroll = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(render);
+      };
+
+      if (calm.matches) {
+        travel.style.strokeDasharray = `0 ${total}`;
+      } else {
+        root.classList.add('ruta--js');
+        render();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+      }
     }
-
-    <text x="4" y="94" font-size="2.2" fill="var(--ink-soft)" font-family="IBM Plex Mono, monospace">
-      León · 12.43° N, 86.88° W → Managua · 12.13° N, 86.25° W → online
-    </text>
-  </svg>
-  <figcaption class="sr-only">
-    {lang === 'es' ? 'Mapa con las paradas de la carrera desde León hasta el trabajo en línea.' : 'Career map from León to online work.'}
-  </figcaption>
-</figure>
+  }
+</script>

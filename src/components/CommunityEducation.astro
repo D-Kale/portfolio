@@ -1,12 +1,16 @@
 ---
-import { community, formation } from '../data/community';
-import { pick } from '../data/community';
+import { community, formation, pick } from '../data/community';
+import BrandMark from './BrandMark.astro';
+import type { Locale } from '../i18n/ui';
 
 interface Props {
-  lang?: 'es' | 'en';
+  lang?: Locale;
 }
 
 const { lang = 'es' } = Astro.props;
+const es = lang === 'es';
+const highlight = formation.filter((f) => f.image);
+const rest = formation.filter((f) => !f.image);
 ---
 
 <section
@@ -14,36 +18,93 @@ const { lang = 'es' } = Astro.props;
   class="mt-[var(--space-xl)]"
   aria-labelledby="comunidad-title"
 >
-  <h2 id="comunidad-title" class="text-3xl font-bold">{lang === 'es' ? 'Comunidad' : 'Community'}</h2>
+  <h2 id="comunidad-title" class="text-3xl font-bold">{es ? 'Comunidad' : 'Community'}</h2>
   <ul class="mt-6 grid gap-4 md:grid-cols-2">
     {
       community.map((c) => (
-        <li class="rounded-[var(--radius-m)] border border-[var(--ink-soft)] bg-white p-5 shadow-card">
-          <h3 class="text-lg font-bold">{c.title[lang]}</h3>
-          <p class="mt-2 text-sm">{c.summary[lang]}</p>
+        <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] transition-colors duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:bg-[var(--elev-2)]">
+          {c.image && (
+            <img
+              class="aspect-[16/9] w-full object-cover"
+              src={c.image}
+              alt={c.alt?.[lang] ?? ''}
+              width="1400"
+              height="1400"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <div class="p-5">
+            <h3 class="flex items-center gap-2 text-lg font-bold">
+              {c.brand && <BrandMark name={c.brand} />}
+              {c.title[lang]}
+            </h3>
+            <p class="mt-2 text-sm">{c.summary[lang]}</p>
+          </div>
         </li>
       ))
     }
   </ul>
 
   <div class="mt-[var(--space-l)]" aria-labelledby="formacion-title">
-    <h2 id="formacion-title" class="text-3xl font-bold">{lang === 'es' ? 'Formación' : 'Education'}</h2>
-    <ul class="mt-6 grid gap-4 md:grid-cols-2">
+    <h2 id="formacion-title" class="text-3xl font-bold">{es ? 'Formación' : 'Education'}</h2>
+
+    <ul class="mt-6 grid gap-4">
       {
-        formation.map((f) => (
-          <li class="rounded-[var(--radius-m)] border border-[var(--ink-soft)] bg-white p-5 shadow-card">
-            <div class="flex items-start justify-between gap-3">
-              <h3 class="text-lg font-bold">{f.title[lang]}</h3>
-              {f.status && (
-                <span
-                  class="shrink-0 rounded-full bg-[var(--paper-deep)] px-3 py-1 font-[var(--font-mono)] text-[11px]"
-                  aria-label={f.status[lang]}
-                >
-                  {pick(lang, f.status)}
-                </span>
-              )}
+        highlight.map((f) => (
+          <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)]">
+            <div class="grid md:grid-cols-[1.1fr_1fr]">
+              <img
+                class="aspect-[16/9] w-full object-cover"
+                src={f.image}
+                alt={f.alt?.[lang] ?? ''}
+                width="1400"
+                height="1400"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="p-6">
+                {f.logo && (
+                  <img
+                    class="mb-4 h-9 w-auto"
+                    src={f.logo}
+                    alt={f.logoAlt?.[lang] ?? ''}
+                    width="1200"
+                    height="263"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <h3 class="text-xl font-bold">{f.title[lang]}</h3>
+                <p class="mt-2 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
+                {f.status && (
+                  <span class="mt-4 inline-block rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
+                    {pick(lang, f.status)}
+                  </span>
+                )}
+              </div>
             </div>
-            <p class="mt-2 text-sm">{f.summary[lang]}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="mt-4">
+      {
+        rest.map((f) => (
+          <li class="flex flex-wrap items-start justify-between gap-x-6 gap-y-2 border-b border-[var(--outline-variant)] py-4">
+            <div class="min-w-0">
+              <h3 class="flex items-center gap-2 font-semibold">
+                {f.brand && <BrandMark name={f.brand} />}
+                {f.title[lang]}
+              </h3>
+              <p class="mt-1 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
+            </div>
+            {f.status && (
+              <span class="shrink-0 rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
+                {pick(lang, f.status)}
+              </span>
+            )}
           </li>
         ))
       }
