@@ -1,0 +1,36 @@
+---
+import { iconFor } from '../data/tech';
+
+interface Props {
+  name: string;
+  active?: boolean;
+}
+
+const { name, active = false } = Astro.props;
+const icon = iconFor(name);
+---
+
+<li
+  class:list={[
+    'inline-flex items-center gap-1.5 rounded-[var(--radius-xs)] px-2.5 py-2 font-[var(--font-mono)] text-[12px] leading-none',
+    active
+      ? 'bg-[var(--elev-route)] text-[var(--ink)]'
+      : 'bg-[var(--surface-hover)] text-[var(--ink-soft)]',
+  ]}
+>
+  {
+    icon && (
+      <svg
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        fill="currentColor"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d={icon.path} />
+      </svg>
+    )
+  }
+  <span>{name}</span>
+</li>

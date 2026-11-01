@@ -6,6 +6,9 @@ export interface Project {
   featured?: boolean;
   stack: string[];
   links?: { label: string; href: string }[];
+  image?: string;
+  alt?: { es: string; en: string };
+  gallery?: { src: string; alt: { es: string; en: string } }[];
   es: { title: string; kind: string; year: string; summary: string; depth: string[] };
   en: { title: string; kind: string; year: string; summary: string; depth: string[] };
 }
@@ -16,6 +19,25 @@ export const projects: Project[] = [
     featured: true,
     stack: ['Go', 'Flutter', 'Python', 'PostgreSQL', 'Redis', 'LiveKit', 'Docker', 'nginx'],
     links: [{ label: 'Hackathon Nicaragua · Kronox 2026', href: 'https://www.linkedin.com/posts/andressanchezsf_de-la-idea-al-producto-ma%C3%B1ana-presentamos-activity-7513823508443840512-bk5t' }],
+    image: '/assets/hackatonnic2026/hackathon-rollup-voxlab.webp',
+    alt: {
+      es: 'Rollup de VoxLab en la Hackathon Nicaragua: "Entrena tu voz"',
+      en: 'VoxLab banner at Hackathon Nicaragua: "Train your voice"',
+    },
+    gallery: [
+      {
+        src: '/assets/hackatonnic2026/hackathon-stand-voxlab.webp',
+        alt: { es: 'Stand de VoxLab con stickers, QR y lapa', en: 'VoxLab stand with stickers, QR code and keychain' },
+      },
+      {
+        src: '/assets/hackatonnic2026/hackathon-slide-voxlab-salon.webp',
+        alt: { es: 'Laptop con la presentación de VoxLab en el salón', en: 'Laptop with the VoxLab pitch running on stage' },
+      },
+      {
+        src: '/assets/voxlab/voxlab-equipo-uam.webp',
+        alt: { es: 'Equipo de UAM con camisetas de VoxLab', en: 'UAM team wearing VoxLab shirts' },
+      },
+    ],
     es: {
       title: 'VoxLab',
       kind: 'Startup en incubación · presentada en Hackathon Nicaragua (Kronox 2026), categoría Startup',
@@ -184,5 +206,14 @@ export const projects: Project[] = [
 ];
 
 export function forLocale(loc: Locale) {
-  return projects.map((p) => ({ id: p.id, featured: p.featured ?? false, stack: p.stack, links: p.links ?? [], ...p[loc] }));
+  return projects.map((p) => ({
+    id: p.id,
+    featured: p.featured ?? false,
+    stack: p.stack,
+    links: p.links ?? [],
+    image: p.image,
+    alt: p.alt?.[loc],
+    gallery: p.gallery ?? [],
+    ...p[loc],
+  }));
 }
