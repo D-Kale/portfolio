@@ -14,7 +14,12 @@ const line =
 
 <footer class="mt-[var(--space-xl)] border-t border-[var(--ink-soft)] py-[var(--space-l)]">
   <div class="mx-auto max-w-5xl px-4">
-    <p class="font-[var(--font-mono)] text-xs text-[var(--ink)]/70">{line}</p>
+    <p class="max-w-prose text-sm">
+      {lang === 'es'
+        ? 'Disponible para proyectos de software y mentoría en León y en línea.'
+        : 'Available for software projects and mentoring, in León and online.'}
+    </p>
+    <p class="mt-2 font-[var(--font-mono)] text-xs text-[var(--ink)]/70">{line}</p>
     <p class="text-xs">
       © {year} Andrés Sánchez ·
       <a class="underline" href="mailto:a3235633@gmail.com">{contact}</a> ·

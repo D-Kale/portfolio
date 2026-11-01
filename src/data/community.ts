@@ -10,6 +10,9 @@ export interface CommunityStop {
   alt?: { es: string; en: string };
   /** institution whose logo identifies the experience (see src/data/brands.ts) */
   brand?: string;
+  /** real logo file, shown on a light plate */
+  logo?: string;
+  logoAlt?: { es: string; en: string };
 }
 
 export const community: CommunityStop[] = [
@@ -56,14 +59,15 @@ export const community: CommunityStop[] = [
   },
   {
     id: 'tedx-rol',
-    brand: 'TED',
+    logo: '/assets/logos/tedx-avenida-bolivar.webp',
+    logoAlt: { es: 'Logotipo de TEDx Avenida Bolívar', en: 'TEDx Avenida Bolívar logo' },
     title: { es: 'TEDx Avenida Bolívar · consultor', en: 'TEDx Avenida Bolívar · consultant' },
     summary: {
       es: 'Guía técnica del sitio del evento hasta su cierre: decisiones de arquitectura, código base y despliegue en hosting compartido.',
       en: 'Technical guide for the event website until it closed: architecture decisions, codebase and deployment on shared hosting.',
     },
-    image: '/assets/tedx/tedx-escenario-aval-blivar.webp',
-    alt: { es: 'Escenario del TEDx Avenida Bolívar', en: 'TEDx Avenida Bolívar stage' },
+    image: '/assets/tedx/landing-tedx.webp',
+    alt: { es: 'Landing del TEDx Avenida Bolívar', en: 'TEDx Avenida Bolívar landing page' },
   },
   {
     id: 'hackathon',
@@ -105,6 +109,8 @@ export const formation: FormationItem[] = [
   },
   {
     id: 'cs50',
+    logo: '/assets/logos/cs50.webp',
+    logoAlt: { es: 'Logotipo de Harvard CS50', en: 'Harvard CS50 logo' },
     title: { es: 'Harvard CS50x', en: 'Harvard CS50x' },
     summary: {
       es: 'Fundamentos completados: algoritmos, memoria, C y Python con criterio.',
@@ -114,6 +120,8 @@ export const formation: FormationItem[] = [
   },
   {
     id: 'cs50w',
+    logo: '/assets/logos/cs50.webp',
+    logoAlt: { es: 'Logotipo de Harvard CS50', en: 'Harvard CS50 logo' },
     title: { es: 'Harvard CS50W', en: 'Harvard CS50W' },
     summary: {
       es: 'Programming web con Django, SQL y JavaScript.',
@@ -123,13 +131,16 @@ export const formation: FormationItem[] = [
   },
   {
     id: 'cisco',
-    brand: 'Cisco',
+    logo: '/assets/logos/cisco-networking-academy.webp',
+    logoAlt: { es: 'Logotipo de Cisco Networking Academy', en: 'Cisco Networking Academy logo' },
     title: { es: 'Cisco · IT Essentials', en: 'Cisco · IT Essentials' },
     summary: { es: 'Hardware, redes y soporte: la base antes de la nube.', en: 'Hardware, networking and support: the layer under the cloud.' },
     status: { es: 'Completado', en: 'Completed' },
   },
   {
     id: 'aspire',
+    logo: '/assets/logos/aspire-institute.webp',
+    logoAlt: { es: 'Logotipo de Aspire Institute', en: 'Aspire Institute logo' },
     title: { es: 'Aspire', en: 'Aspire' },
     summary: {
       es: 'Programa de emprendimiento que toma el lugar de InnovaBootcamp con más renombre: habilidades idénticas, comunidad más amplia.',

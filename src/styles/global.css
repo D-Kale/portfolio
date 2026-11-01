@@ -128,6 +128,8 @@
     min-height: 78svh;
     align-items: flex-end;
     padding-bottom: 4svh;
+    /* la placa fija ocupa 44svh: la parada no puede quedar debajo */
+    scroll-margin-top: calc(44svh + 1rem);
   }
 
   .ruta-stop--end {
@@ -316,9 +318,13 @@
     transform var(--dur-medium) var(--ease-standard);
 }
 
-/* El atenuado solo aplica cuando el script puede mover la ruta. */
-.ruta--js .ruta-card {
-  opacity: 0.55;
+/* El atenuado solo afecta la foto: opacificar el texto lo bajaria de 4.5:1. */
+.ruta--js .ruta-card-photo {
+  opacity: 0.5;
+}
+
+.ruta--js .ruta-stop.is-active .ruta-card-photo {
+  opacity: 1;
 }
 
 .ruta-stop.is-active .ruta-card {
@@ -382,8 +388,21 @@
 .ruta-card-logo {
   display: block;
   width: auto;
-  height: 2.25rem;
+  height: 2.5rem;
   margin-top: 1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-xs);
+  background: var(--logo-plate);
+}
+
+/* Logos de marca con tinta oscura: se leen sobre una placa clara. */
+.brand-plate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-xs);
+  background: var(--logo-plate);
 }
 
 .ruta-end {
@@ -407,6 +426,7 @@ details > summary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 24px;
   cursor: pointer;
   list-style: none;
   font-family: var(--font-mono);
@@ -454,5 +474,10 @@ details[open] > summary::before {
 
   .ruta-pin-label {
     display: none;
+  }
+
+  /* solo la parada activa muestra su etiqueta: sin colisiones y sin puntos anonimos */
+  .ruta-pin.is-active .ruta-pin-label {
+    display: grid;
   }
 }

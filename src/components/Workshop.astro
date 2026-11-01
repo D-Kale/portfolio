@@ -20,17 +20,30 @@ const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
   {
     featured.map((p) => (
       <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] transition-colors duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:bg-[var(--elev-2)]">
-        {p.image && (
-          <img
-            class="aspect-[16/9] w-full object-cover"
-            src={p.image}
-            alt={p.alt ?? ''}
-            width="1400"
-            height="1400"
-            loading="lazy"
-            decoding="async"
-          />
-        )}
+        {p.image &&
+          (p.imageFit === 'logo' ? (
+            <div class="flex items-center justify-center border-b border-[var(--outline-variant)] bg-[var(--elev-2)] px-8 py-16">
+              <img
+                class="h-48 w-auto"
+                src={p.image}
+                alt={p.alt ?? ''}
+                width={p.imageWidth ?? 400}
+                height={p.imageHeight ?? 400}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ) : (
+            <img
+              class="aspect-[16/9] w-full object-cover"
+              src={p.image}
+              alt={p.alt ?? ''}
+              width="1400"
+              height="1400"
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
         <div class="grid gap-6 p-6 md:grid-cols-[1.4fr_1fr]">
           <div>
             <p class="font-[var(--font-mono)] text-[12px] tracking-wide text-[var(--ink-soft)]">{p.year}</p>

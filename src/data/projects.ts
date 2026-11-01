@@ -7,6 +7,10 @@ export interface Project {
   stack: string[];
   links?: { label: string; href: string }[];
   image?: string;
+  /** 'cover' fills a 16:9 band, 'logo' keeps the natural ratio of a wordmark */
+  imageFit?: 'cover' | 'logo';
+  imageWidth?: number;
+  imageHeight?: number;
   alt?: { es: string; en: string };
   gallery?: { src: string; alt: { es: string; en: string } }[];
   es: { title: string; kind: string; year: string; summary: string; depth: string[] };
@@ -70,6 +74,11 @@ export const projects: Project[] = [
     featured: true,
     stack: ['Go', 'Gin', 'sqlc', 'PostgreSQL', 'Redis', 'Astro', 'React'],
     links: [{ label: 'RustFS en lugar de MinIO', href: 'https://github.com/D-Kale/go-storage' }],
+    image: '/assets/waresis/waresis-mark.webp',
+    imageFit: 'logo',
+    imageWidth: 400,
+    imageHeight: 369,
+    alt: { es: 'Marca de Waresis', en: 'Waresis mark' },
     es: {
       title: 'Waresis',
       kind: 'ERP multi-tenant · en construcción, no público aún',
@@ -212,6 +221,9 @@ export function forLocale(loc: Locale) {
     stack: p.stack,
     links: p.links ?? [],
     image: p.image,
+    imageFit: p.imageFit,
+    imageWidth: p.imageWidth,
+    imageHeight: p.imageHeight,
     alt: p.alt?.[loc],
     gallery: p.gallery ?? [],
     ...p[loc],

@@ -37,6 +37,11 @@ const rest = formation.filter((f) => !f.image);
           <div class="p-5">
             <h3 class="flex items-center gap-2 text-lg font-bold">
               {c.brand && <BrandMark name={c.brand} />}
+              {c.logo && (
+                <span class="brand-plate">
+                  <img class="h-6 w-auto" src={c.logo} alt={c.logoAlt?.[lang] ?? ''} width="600" height="207" loading="lazy" decoding="async" />
+                </span>
+              )}
               {c.title[lang]}
             </h3>
             <p class="mt-2 text-sm">{c.summary[lang]}</p>
@@ -45,28 +50,30 @@ const rest = formation.filter((f) => !f.image);
       ))
     }
   </ul>
+</section>
 
-  <div class="mt-[var(--space-l)]" aria-labelledby="formacion-title">
-    <h2 id="formacion-title" class="text-3xl font-bold">{es ? 'Formación' : 'Education'}</h2>
+<section id="formacion" class="mt-[var(--space-xl)]" aria-labelledby="formacion-title">
+  <h2 id="formacion-title" class="text-3xl font-bold">{es ? 'Formación' : 'Education'}</h2>
 
-    <ul class="mt-6 grid gap-4">
-      {
-        highlight.map((f) => (
-          <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)]">
-            <div class="grid md:grid-cols-[1.1fr_1fr]">
-              <img
-                class="aspect-[16/9] w-full object-cover"
-                src={f.image}
-                alt={f.alt?.[lang] ?? ''}
-                width="1400"
-                height="1400"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="p-6">
-                {f.logo && (
+  <ul class="mt-6 grid gap-4">
+    {
+      highlight.map((f) => (
+        <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)]">
+          <div class="grid md:grid-cols-[1.1fr_1fr]">
+            <img
+              class="aspect-[16/9] w-full object-cover"
+              src={f.image}
+              alt={f.alt?.[lang] ?? ''}
+              width="1400"
+              height="1400"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="p-6">
+              {f.logo && (
+                <span class="brand-plate mb-4">
                   <img
-                    class="mb-4 h-9 w-auto"
+                    class="h-9 w-auto"
                     src={f.logo}
                     alt={f.logoAlt?.[lang] ?? ''}
                     width="1200"
@@ -74,40 +81,45 @@ const rest = formation.filter((f) => !f.image);
                     loading="lazy"
                     decoding="async"
                   />
-                )}
-                <h3 class="text-xl font-bold">{f.title[lang]}</h3>
-                <p class="mt-2 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
-                {f.status && (
-                  <span class="mt-4 inline-block rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
-                    {pick(lang, f.status)}
-                  </span>
-                )}
-              </div>
+                </span>
+              )}
+              <h3 class="text-xl font-bold">{f.title[lang]}</h3>
+              <p class="mt-2 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
+              {f.status && (
+                <span class="mt-4 inline-block rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
+                  {pick(lang, f.status)}
+                </span>
+              )}
             </div>
-          </li>
-        ))
-      }
-    </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
 
-    <ul class="mt-4">
-      {
-        rest.map((f) => (
-          <li class="flex flex-wrap items-start justify-between gap-x-6 gap-y-2 border-b border-[var(--outline-variant)] py-4">
-            <div class="min-w-0">
-              <h3 class="flex items-center gap-2 font-semibold">
-                {f.brand && <BrandMark name={f.brand} />}
-                {f.title[lang]}
-              </h3>
-              <p class="mt-1 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
-            </div>
-            {f.status && (
-              <span class="shrink-0 rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
-                {pick(lang, f.status)}
-              </span>
-            )}
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+  <ul class="mt-4">
+    {
+      rest.map((f) => (
+        <li class="flex flex-wrap items-start justify-between gap-x-6 gap-y-2 border-b border-[var(--outline-variant)] py-4">
+          <div class="min-w-0">
+            <h3 class="flex items-center gap-2 font-semibold">
+              {f.brand && <BrandMark name={f.brand} />}
+              {f.logo && (
+                <span class="brand-plate">
+                  <img class="h-6 w-auto" src={f.logo} alt={f.logoAlt?.[lang] ?? ''} width="600" height="207" loading="lazy" decoding="async" />
+                </span>
+              )}
+              {f.title[lang]}
+            </h3>
+            <p class="mt-1 text-sm text-[var(--ink-soft)]">{f.summary[lang]}</p>
+          </div>
+          {f.status && (
+            <span class="shrink-0 rounded-full border border-[var(--outline-variant)] bg-[var(--elev-2)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
+              {pick(lang, f.status)}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
 </section>

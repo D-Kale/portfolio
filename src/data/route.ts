@@ -99,6 +99,10 @@ export const pins: Pin[] = [
     place: { es: 'Managua · TEDx Avenida Bolívar', en: 'Managua · TEDx Avenida Bolívar' },
     km: 58,
     at: 11,
+    logo: '/assets/logos/tedx-avenida-bolivar.webp',
+    logoAlt: { es: 'Logotipo de TEDx Avenida Bolívar', en: 'TEDx Avenida Bolívar logo' },
+    image: '/assets/tedx/landing-tedx.webp',
+    alt: { es: 'landing de TEDx Avenida Bolívar', en: 'TEDx Avenida Bolívar landing page' },
   },
   {
     id: 'online',

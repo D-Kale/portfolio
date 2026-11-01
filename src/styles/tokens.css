@@ -25,6 +25,9 @@
   --outline: #6b7186;
   --outline-variant: #383d4c;
 
+  /* Placa clara para logos de marca con tinta oscura (TEDx, Cisco, CS50, ULSA). */
+  --logo-plate: #d9dce4;
+
   /* ---- Acentos ---- */
   --route: #f59e0b;
   --route-hi: #fbbf24;
