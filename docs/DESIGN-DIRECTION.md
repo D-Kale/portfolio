@@ -138,7 +138,7 @@ Estructura real: header con nav + toggle de idioma → hero (retrato + badge "Di
 
 | Técnica | Coste | A11y | Dónde paga aquí |
 |---|---|---|---|
-| **Script vanilla** (`getPointAtLength` + tangente) | **~1 KB** | foco gestionado a mano | **Camión scroll-driven + resalte pin ↔ tarjeta** |
+| **Script vanilla** (`getPointAtLength` + tangente) | **1,6 KB inline** | foco gestionado a mano | **Camión scroll-driven + resalte pin ↔ tarjeta** |
 | `:has()` | 0 | heredada del elemento | No usado: el resalte lo calcula el script |
 | scroll-driven (`animation-timeline: view()`) | 0 | respetar `prefers-reduced-motion` | Descartado: no permite girar el camión según la tangente de la curva |
 | `@starting-style` + `transition-behavior: allow-discrete` | 0 | — | No usado: no quedan popovers |

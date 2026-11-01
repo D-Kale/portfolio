@@ -50,7 +50,7 @@ pnpm preview    # sirve la build localmente
 pnpm check      # astro check + TypeScript
 ```
 
-El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo **un script vanilla de ~1 KB sin librerías** que mueve el camión por la carretera según el scroll. Todo en español por defecto; inglés en `/en` con `hreflang`.
+El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo **un script vanilla inline de 1,6 KB (0,8 KB gzip, sin librerías)** que mueve el camión por la carretera según el scroll. Todo en español por defecto; inglés en `/en` con `hreflang`.
 
 ## Stack
 
@@ -60,7 +60,7 @@ El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo *
 | Estilos | CSS custom properties (tokens en `src/styles/tokens.css`) + `@layer base` para que las utilities de Tailwind ganen + `prefers-reduced-motion` |
 | Logos | `simple-icons` (imports nombrados, tree-shaking) — monocromos, self-host, sin CDN |
 | Idiomas | ES raíz + `/en` toggle (routing manual, sin dependencias) |
-| JavaScript | **mínimo**: un script vanilla (~1 KB, sin dependencias) para el camión scroll-driven y el resalte pin ↔ tarjeta. Sin hidratación, sin librerías, sin framework |
+| JavaScript | **mínimo**: un script vanilla inline (1,6 KB / 0,8 KB gzip, sin dependencias) para el camión scroll-driven y el resalte pin ↔ tarjeta. Sin hidratación, sin librerías, sin framework |
 | Calidad | `astro check`, pruebas de teclado, `prefers-reduced-motion`, Lighthouse |
 | Despliegue (pendiente tu orden) | GitHub → AWS Amplify Hosting (GitHub App, sin claves en repo) |
 | Backend (fase 2) | API Gateway HTTP + Lambda Go (`provided.al2023`) + DynamoDB on-demand |
