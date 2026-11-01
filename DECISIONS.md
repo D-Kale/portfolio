@@ -98,6 +98,12 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - **Por qué**: cada `h2` del sitio es una sección con ancla y ruta de lectura propia. Con la formación dentro de comunidad, el encabezado quedaba al mismo nivel que una sección y la navegación no ofrecía forma de llegar a la evidencia de formación (CS50, Cisco, Aspire).
 - **Alternativa descartada**: mantenerlo anidado y no tocar el header (menos cambios, pero la IA queda desalineada con los títulos).
 
+## 2026-11-01 · Ritmo de la ruta en móvil y orden de cascada
+
+- **Decisión**: en móvil cada parada mide **60svh** (antes ocupaba `70vh` por un problema de cascada), la tarjeta se alinea al fondo (`align-items: flex-end`), la foto de la parada usa proporción 20:9 y el cuerpo 1rem de padding. El bloque de overrides móviles vive **al final** de `global.css`, porque si aparece antes que las reglas base (misma especificidad) gana la base.
+- **Por qué**: la evidencia de proyectos (VoxLab, Waresis) estaba a 7.058 px en móvil, 7,4 pantallas de scroll. Con el arreglo llega a 6.012 px (6,1 pantallas) y la ruta baja de 5.760 a 4.714 px. El hallazgo de fondo: los overrides móviles de `.ruta-stop` estaban escritos **antes** de las reglas base, así que en móvil ganaban `min-height: 70vh`, `align-items: center` y `scroll-margin-top: 4rem` — el `scroll-margin-top: calc(44svh + 1rem)` que evita que la parada quede bajo la placa fija **nunca estuvo activo** en móvil. Además había 458 px de espacio en blanco entre la placa y la primera tarjeta (la placa ya ocupa 371 px en flujo, más 405 px de `padding-top` redundante que se eliminó).
+- **Alternativas descartadas**: ocultar la foto de las paradas en móvil (es la evidencia y da color al camino); recortar el texto de las paradas (el copy es el argumento); bajar la placa de 44svh (es el elemento que firma la metáfora); tocar el ritmo de escritorio (la versión de dos columnas ya funciona: la evidencia está a 5,8 pantallas).
+
 ## Pendientes documentados (fase 2, post-deadline)
 
 - API de postales: `POST /notas` (validación + rate limit por IP con TTL), `GET /notas` (aprobadas), `GET /health`.

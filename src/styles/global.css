@@ -120,21 +120,6 @@
     padding-top: 0.75rem;
   }
 
-  .ruta-cards {
-    padding-top: 48svh;
-  }
-
-  .ruta-stop {
-    min-height: 78svh;
-    align-items: flex-end;
-    padding-bottom: 4svh;
-    /* la placa fija ocupa 44svh: la parada no puede quedar debajo */
-    scroll-margin-top: calc(44svh + 1rem);
-  }
-
-  .ruta-stop--end {
-    min-height: 24svh;
-  }
 }
 
 .ruta-plate {
@@ -479,5 +464,25 @@ details[open] > summary::before {
   /* solo la parada activa muestra su etiqueta: sin colisiones y sin puntos anonimos */
   .ruta-pin.is-active .ruta-pin-label {
     display: grid;
+  }
+
+  .ruta-stop {
+    min-height: 60svh;
+    align-items: flex-end;
+    padding-bottom: 4svh;
+    /* la placa fija ocupa 44svh: la parada no puede quedar debajo */
+    scroll-margin-top: calc(44svh + 1rem);
+  }
+
+  .ruta-stop--end {
+    min-height: 24svh;
+  }
+
+  .ruta-card-photo {
+    aspect-ratio: 20 / 9;
+  }
+
+  .ruta-card-body {
+    padding: 1rem;
   }
 }
