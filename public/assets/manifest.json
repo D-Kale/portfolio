@@ -1,0 +1,658 @@
+[
+  {
+    "event": "root",
+    "original": "foto_linkedIn.png",
+    "renamed": "portrait.webp",
+    "subject": "Retrato de Andres con camisa oscura y lanyard",
+    "section": "hero",
+    "verdict": "crop"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-2.webp",
+    "renamed": "griteria-plataforma-velas.webp",
+    "subject": "Altar con figuras y velas sobre plataforma dorada",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-3.webp",
+    "renamed": "griteria-purisima-resplandor.webp",
+    "subject": "Estatua de la Purisima con aureola de rayos sobre nube",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-4.webp",
+    "renamed": "griteria-multitud-noche.webp",
+    "subject": "Multitud de noche frente a un altar, ninos en hombros",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-5.webp",
+    "renamed": "griteria-altar-calle-noche.webp",
+    "subject": "Altar de calle de noche con la Virgen",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-6.webp",
+    "renamed": "griteria-chancheria.webp",
+    "subject": "Puesto de comida de calle durante la Griteria",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g-7.webp",
+    "renamed": "griteria-mesa-voluntaria.webp",
+    "subject": "Mesa con la Virgen y una voluntaria",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "concepcion",
+    "original": "igexport-DcFo2lpjt2g.webp",
+    "renamed": "griteria-catedral-corona.webp",
+    "subject": "Catedral de Leon con la corona de la Virgen al anochecer",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-10.webp",
+    "renamed": "merced-procesion-calle.webp",
+    "subject": "Procesion con palio dorado en la calle",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-11.webp",
+    "renamed": null,
+    "subject": "Multitud con sombrillas",
+    "section": "ruta-mirador",
+    "verdict": "discard"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-12.webp",
+    "renamed": "merced-palio-virgen.webp",
+    "subject": "Palio dorado con la Virgen cargado entre fieles",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-13.webp",
+    "renamed": "merced-palio-fotografos.webp",
+    "subject": "Palio con personas fotografiando",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-14.webp",
+    "renamed": null,
+    "subject": "Multitud de espaldas",
+    "section": "ruta-mirador",
+    "verdict": "discard"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-15.webp",
+    "renamed": "merced-calle-gente.webp",
+    "subject": "Calle con gente durante la procesion",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-16.webp",
+    "renamed": "merced-alfombra-aserin.webp",
+    "subject": "Alfombra de aserin con la imagen de la Virgen",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-2.webp",
+    "renamed": "merced-procesion-catedral.webp",
+    "subject": "Procesion frente a la catedral con ninas de blanco",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-3.webp",
+    "renamed": "leon-iglesia-interior-altar.webp",
+    "subject": "Interior de iglesia con altar y una persona fotografiando",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-4.webp",
+    "renamed": null,
+    "subject": "Muro con fotografias",
+    "section": "ruta-mirador",
+    "verdict": "discard"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-5.webp",
+    "renamed": "purisima-altar-que-viva.webp",
+    "subject": "Altar 'Que viva la Purisima' con faldon azul y querubines",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-6.webp",
+    "renamed": "purisima-altar-flores.webp",
+    "subject": "Altar con flores y aureola dorada",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-7.webp",
+    "renamed": "purisima-portal-casa.webp",
+    "subject": "Portal de casa con altar y gente pasando",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-8.webp",
+    "renamed": "purisima-altar-flores-rojas.webp",
+    "subject": "Altar con flores rojas en portal",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq-9.webp",
+    "renamed": "purisima-altar-flores-2.webp",
+    "subject": "Altar con flores y gente",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "merced",
+    "original": "igexport-Dd0Q3IhDmKq.webp",
+    "renamed": "leon-catedral-frente.webp",
+    "subject": "Fachada de la catedral de Leon a pleno sol",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-10.webp",
+    "renamed": "museo-maquetas-iglesias.webp",
+    "subject": "Maquetas de iglesias en vitrina",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-11.webp",
+    "renamed": "museo-nacimiento-figuras.webp",
+    "subject": "Figuras de nacimiento con trajes rojos",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-12.webp",
+    "renamed": "museo-telar-escultura.webp",
+    "subject": "Telar y escultura blanca con cartel",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-13.webp",
+    "renamed": "museo-marimba-guitarra.webp",
+    "subject": "Marimba y guitarra en vitrina",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-14.webp",
+    "renamed": "museo-santos-mural.webp",
+    "subject": "Figuras de santos frente a mural floral",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-15.webp",
+    "renamed": "museo-patio-mural.webp",
+    "subject": "Patio del museo desde arriba con mural de arbol",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-16.webp",
+    "renamed": "museo-muro-santos.webp",
+    "subject": "Muro de imagenes de santos talladas",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-2.webp",
+    "renamed": "museo-pintura-colonial.webp",
+    "subject": "Pintura colonial enmarcada",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-3.webp",
+    "renamed": "museo-mural-ultima-cena.webp",
+    "subject": "Mural de la Ultima Cena con visitantes debajo",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-4.webp",
+    "renamed": "museo-pasillo-cuadros.webp",
+    "subject": "Visitantes en pasillo con cuadros",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-5.webp",
+    "renamed": null,
+    "subject": "Textura de muro de piedra",
+    "section": "ruta-mirador",
+    "verdict": "discard"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-6.webp",
+    "renamed": "museo-visitantes-mural.webp",
+    "subject": "Personas mirando un mural",
+    "section": "ruta-mirador",
+    "verdict": "crop"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-7.webp",
+    "renamed": "museo-maqueta-catedral.webp",
+    "subject": "Maqueta de madera de la catedral",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-8.webp",
+    "renamed": null,
+    "subject": "Persona frente a dibujos lineales en el muro",
+    "section": "ruta-mirador",
+    "verdict": "discard"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08-9.webp",
+    "renamed": "museo-gigantona-marionetas.webp",
+    "subject": "Gigantona de vestido azul con marionetas",
+    "section": "ruta-mirador",
+    "verdict": "use"
+  },
+  {
+    "event": "museo",
+    "original": "igexport-DXj-9dMju08.webp",
+    "renamed": null,
+    "subject": "Vaso de cafe",
+    "section": "",
+    "verdict": "discard"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-2.webp",
+    "renamed": null,
+    "subject": "Salon con proyector y peluche en la mesa",
+    "section": "comunidad",
+    "verdict": "discard"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-3.webp",
+    "renamed": "flutter-charla-andres-1.webp",
+    "subject": "Andres exponiendo junto a la proyeccion",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-4.webp",
+    "renamed": "flutter-slide-tu-app-no-es-un-servidor.webp",
+    "subject": "Diapositiva 'Tu App No Es Un Servidor'",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-5.webp",
+    "renamed": "flutter-charla-andres-2.webp",
+    "subject": "Andres exponiendo junto a la diapositiva",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-6.webp",
+    "renamed": null,
+    "subject": "Primer plano del peluche azul",
+    "section": "",
+    "verdict": "discard"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-7.webp",
+    "renamed": "flutter-charla-andres-3.webp",
+    "subject": "Andres exponiendo con diapositivas",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-8.webp",
+    "renamed": "flutter-charla-andres-4.webp",
+    "subject": "Andres exponiendo junto a las diapositivas",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz-9.webp",
+    "renamed": "flutter-charla-andres-5.webp",
+    "subject": "Andres exponiendo de perfil",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "flutter",
+    "original": "igexport-DcXG6yIjopz.webp",
+    "renamed": null,
+    "subject": "Primer plano del peluche azul",
+    "section": "",
+    "verdict": "discard"
+  },
+  {
+    "event": "techday",
+    "original": "igexport-Dal6IN9jsdf-4.webp",
+    "renamed": "techday-manageengine-ponencia.webp",
+    "subject": "Ponencia de ManageEngine sobre endpoints",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "techday",
+    "original": "igexport-Dal6IN9jsdf-5.webp",
+    "renamed": "techday-diagrama-arquitectura.webp",
+    "subject": "Diagrama de arquitectura en pantalla",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "techday",
+    "original": "igexport-Dal6IN9jsdf-8.webp",
+    "renamed": "techday-cisco-airgap.webp",
+    "subject": "Ponencia de Cisco sobre AirGAP",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "techday",
+    "original": "image copy 2.png",
+    "renamed": "techday-salon-lleno.webp",
+    "subject": "Salon lleno con pantallas azules",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "techday",
+    "original": "image copy 3.png",
+    "renamed": "techday-slide-genai.webp",
+    "subject": "Diapositiva sobre retos de negocio con GenAI",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "techday",
+    "original": "image copy 4.png",
+    "renamed": "techday-huawei-db.webp",
+    "subject": "Escenario Huawei sobre operaciones de base de datos",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "techday",
+    "original": "image copy.png",
+    "renamed": "techday-publico-grabando.webp",
+    "subject": "Publico grabando con camaras",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "tedx",
+    "original": "tedx-escenario-aval-blivar.webp",
+    "renamed": "tedx-escenario-aval-blivar.webp",
+    "subject": "Escenario del TEDx Avenida Bolivar",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd-2.webp",
+    "renamed": null,
+    "subject": "Plato de comida",
+    "section": "",
+    "verdict": "discard"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd-3.webp",
+    "renamed": "wordcamp-sala-dos-slides.webp",
+    "subject": "Sala con dos diapositivas 'Construccion solida'",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd-4.webp",
+    "renamed": "wordcamp-slide-wordpress-studio.webp",
+    "subject": "Diapositiva 'Que es WordPress Studio'",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd-5.webp",
+    "renamed": "wordcamp-slide-cultura-emprendedora.webp",
+    "subject": "Asistente con lanyard frente a slide de cultura emprendedora",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd-6.webp",
+    "renamed": "wordcamp-escenario-publico.webp",
+    "subject": "Escenario y publico en mesas",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "wordcamp",
+    "original": "igexport-Dd2gA8iDlkd.webp",
+    "renamed": "wordcamp-foto-grupal.webp",
+    "subject": "Foto grupal de todo el evento",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-2.webp",
+    "renamed": "hackathon-stand-boreal.webp",
+    "subject": "Stand de Boreal Labs con una persona",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-3.webp",
+    "renamed": "hackathon-rollup-voxlab.webp",
+    "subject": "Rollup de VoxLab 'Entrena tu voz'",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-4.webp",
+    "renamed": "hackathon-stand-voxlab.webp",
+    "subject": "Stand de VoxLab con stickers, QR y lapa",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-5.webp",
+    "renamed": "hackathon-slide-voxlab-salon.webp",
+    "subject": "Laptop con slide de VoxLab en el salon",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-6.webp",
+    "renamed": "hackathon-app-ui.webp",
+    "subject": "Laptop con la interfaz de la app VoxLab",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-7.webp",
+    "renamed": "hackathon-pasillo-banner.webp",
+    "subject": "Pasillo con cartel de Hackathon Nicaragua",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb-8.webp",
+    "renamed": "hackathon-stand-dos-personas.webp",
+    "subject": "Dos personas en un stand",
+    "section": "comunidad",
+    "verdict": "crop"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "igexport-DeV2i_qDgPb.webp",
+    "renamed": null,
+    "subject": "Plato de comida",
+    "section": "",
+    "verdict": "discard"
+  },
+  {
+    "event": "hackatonnic2026",
+    "original": "image.png",
+    "renamed": "hackathon-foto-equipo.webp",
+    "subject": "Foto de equipo en el stand de Hackathon Nicaragua 2026",
+    "section": "comunidad",
+    "verdict": "use"
+  },
+  {
+    "event": "voxlab",
+    "original": "image copy 2.png",
+    "renamed": "voxlab-certificado-pia.webp",
+    "subject": "Cartel del Programa PIA con el lema de VoxLab",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "voxlab",
+    "original": "image copy.png",
+    "renamed": "voxlab-logo-lapa.webp",
+    "subject": "Logotipo de VoxLab: lapa naranja",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "voxlab",
+    "original": "image.png",
+    "renamed": "voxlab-equipo-uam.webp",
+    "subject": "Equipo UAM con camisetas de VoxLab en las escaleras",
+    "section": "taller",
+    "verdict": "use"
+  },
+  {
+    "event": "ULSA/IA-CAMP (Lasalle_COL)",
+    "original": "image copy 2.png",
+    "renamed": "image copy 2.webp",
+    "subject": "Pantalla con interfaz de IA",
+    "section": "formacion",
+    "verdict": "discard"
+  },
+  {
+    "event": "ULSA/IA-CAMP (Lasalle_COL)",
+    "original": "image copy 3.png",
+    "renamed": "ulsacamp-slide-ia-constructor.webp",
+    "subject": "Diapositiva LASALLE 'De usuario de IA a constructor'",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "ULSA/IA-CAMP (Lasalle_COL)",
+    "original": "image copy.png",
+    "renamed": null,
+    "subject": "Editor con consultas SQL",
+    "section": "formacion",
+    "verdict": "discard"
+  },
+  {
+    "event": "ULSA/IA-CAMP (Lasalle_COL)",
+    "original": "image.png",
+    "renamed": "ulsacamp-slide-pruebas-agente.webp",
+    "subject": "Diapositiva LASALLE 'Pruebas guiadas del agente'",
+    "section": "formacion",
+    "verdict": "crop"
+  },
+  {
+    "event": "ULSA",
+    "original": "image copy 2.png",
+    "renamed": "ulsa-edificio-rotulo.webp",
+    "subject": "Edificio de ULSA con rotulo 'Aprendamos para Servir'",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "ULSA",
+    "original": "image copy.png",
+    "renamed": "ulsa-logo.webp",
+    "subject": "Logotipo de ULSA en verde",
+    "section": "formacion",
+    "verdict": "use"
+  },
+  {
+    "event": "ULSA",
+    "original": "image.png",
+    "renamed": "ulsa-campus.webp",
+    "subject": "Campus de ULSA con fachada azul y palmera",
+    "section": "formacion",
+    "verdict": "use"
+  }
+]
