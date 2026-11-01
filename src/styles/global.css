@@ -1,28 +1,458 @@
-@import './tokens.css';
 @import 'tailwindcss';
+@import './tokens.css';
 
-html {
-  scroll-behavior: smooth;
+/* ------------------------------------------------------------------ *
+ * La Carretera: serpentina vertical con un marcador por hito.
+ * El SVG dibuja el asfalto; los pines y las tarjetas son HTML.
+ * El script vanilla mueve el camión con el scroll.
+ * ------------------------------------------------------------------ */
+
+/* Franja de asfalto al pie del hero: anuncia la carretera de abajo. */
+.hero-road {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 4.5rem;
+  margin-top: var(--space-l);
+  border-block: 1px solid var(--outline-variant);
+  background:
+    repeating-linear-gradient(90deg, var(--route) 0 20px, transparent 20px 44px) 4rem center /
+      calc(100% - 4rem) 2px no-repeat,
+    color-mix(in oklab, var(--ink-muted) 26%, var(--surface-low));
 }
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
+.hero-road::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  translate: 0 -50%;
+  border-radius: 999px;
+  background: var(--jungle);
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+.ruta {
+  padding-block: var(--space-xl);
 }
 
-code,
-kbd,
-samp {
+.ruta-inner {
+  margin-inline: auto;
+  max-width: 76rem;
+  padding-inline: 1rem;
+}
+
+.ruta-header {
+  max-width: 44rem;
+}
+
+.ruta-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+}
+
+.ruta-intro {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+}
+
+.ruta-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1rem;
   font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.ruta-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ruta-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.ruta-grid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .ruta-grid {
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    gap: 4rem;
+  }
+}
+
+/* La placa se queda pegada mientras las tarjetas pasan. */
+.ruta-visual {
+  align-self: start;
+}
+
+@media (min-width: 1024px) {
+  .ruta-visual {
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+/* Móvil: la placa viaja pegada arriba y las tarjetas pasan por debajo. */
+@media (max-width: 1023px) {
+  .ruta-grid {
+    display: block;
+  }
+
+  .ruta-visual {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    height: 44svh;
+    background: var(--bg);
+    padding-top: 0.75rem;
+  }
+
+  .ruta-cards {
+    padding-top: 48svh;
+  }
+
+  .ruta-stop {
+    min-height: 78svh;
+    align-items: flex-end;
+    padding-bottom: 4svh;
+  }
+
+  .ruta-stop--end {
+    min-height: 24svh;
+  }
+}
+
+.ruta-plate {
+  position: relative;
+  height: min(68vh, 620px);
+  aspect-ratio: 420 / 900;
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .ruta-plate {
+    height: 100%;
+  }
+}
+
+.ruta-plate svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ruta-road-shoulder {
+  fill: none;
+  stroke: var(--surface-high);
+  stroke-width: 44;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ruta-road-bed {
+  fill: none;
+  stroke: color-mix(in oklab, var(--ink-muted) 42%, var(--surface-low));
+  stroke-width: 34;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ruta-road-dash {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.4;
+  stroke-dasharray: 14 18;
+  stroke-linecap: round;
+  opacity: 0.65;
+}
+
+.ruta-road-travel {
+  fill: none;
+  stroke: var(--route);
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px color-mix(in oklab, var(--route) 75%, transparent));
+}
+
+.ruta-road-tick {
+  stroke: var(--outline-variant);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  stroke-linecap: round;
+}
+
+.ruta-flag path:first-child {
+  stroke: var(--ink-soft);
+}
+
+.ruta-truck {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65));
+}
+
+/* Marcadores de hito sobre el asfalto. */
+.ruta-pin {
+  position: absolute;
+  left: var(--pin-x);
+  top: var(--pin-y);
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  width: 34px;
+  min-height: 34px;
+  translate: -50% 0;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.ruta-pin-index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 2px solid var(--pin-accent, var(--route));
+  background: var(--surface-lowest);
+  color: var(--pin-accent, var(--route));
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  transition:
+    background var(--dur-short) var(--ease-emphasized),
+    color var(--dur-short) var(--ease-emphasized),
+    scale var(--dur-short) var(--ease-emphasized);
+}
+
+.ruta-pin-label {
+  display: grid;
+  justify-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-xs);
+  background: color-mix(in oklab, var(--surface-lowest) 92%, transparent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0.85;
+  transition: opacity var(--dur-short) var(--ease-emphasized);
+}
+
+.ruta-pin-km {
+  color: var(--pin-accent, var(--route));
+}
+
+.ruta-pin-name {
+  color: var(--ink-soft);
+}
+
+.ruta-pin:hover .ruta-pin-index,
+.ruta-pin:focus-visible .ruta-pin-index,
+.ruta-pin.is-active .ruta-pin-index {
+  background: var(--pin-accent, var(--route));
+  color: var(--surface-lowest);
+  scale: 1.12;
+}
+
+.ruta-pin:focus-visible {
+  outline: none;
+}
+
+.ruta-pin:focus-visible .ruta-pin-index {
+  outline: 2px solid var(--route);
+  outline-offset: 3px;
+}
+
+.ruta-pin:hover .ruta-pin-label,
+.ruta-pin:focus-visible .ruta-pin-label,
+.ruta-pin.is-active .ruta-pin-label {
+  opacity: 1;
+}
+
+/* Tarjetas de la ruta, a la derecha. */
+.ruta-cards {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ruta-stop {
+  display: flex;
+  align-items: center;
+  min-height: 70vh;
+  scroll-margin-top: 4rem;
+}
+
+.ruta-stop:focus-visible {
+  outline: 2px solid var(--route);
+  outline-offset: -2px;
+  border-radius: var(--radius-m);
+}
+
+.ruta-stop--end {
+  min-height: 30vh;
+}
+
+.ruta-card {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-m);
+  background: var(--elev-1);
+  transition:
+    opacity var(--dur-medium) var(--ease-standard),
+    border-color var(--dur-medium) var(--ease-standard),
+    transform var(--dur-medium) var(--ease-standard);
+}
+
+/* El atenuado solo aplica cuando el script puede mover la ruta. */
+.ruta--js .ruta-card {
+  opacity: 0.55;
+}
+
+.ruta-stop.is-active .ruta-card {
+  opacity: 1;
+  border-color: var(--route);
+  transform: translateX(0.25rem);
+}
+
+.ruta-card-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.ruta-card-body {
+  padding: 1.25rem;
+}
+
+.ruta-card-kind {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.ruta-pin-index--static {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.ruta-card-km {
+  margin-left: auto;
+  color: var(--ink-muted);
+}
+
+.ruta-card-title {
+  margin-top: 0.5rem;
+  font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+  font-weight: 700;
+}
+
+.ruta-card-place {
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--route);
+}
+
+.ruta-card-text {
+  margin-top: 0.6rem;
+  color: var(--ink-soft);
+}
+
+.ruta-card-logo {
+  display: block;
+  width: auto;
+  height: 2.25rem;
+  margin-top: 1rem;
+}
+
+.ruta-end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--outline-variant);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ *
+ * Disclosure: profundidad técnica plegable bajo un resumen.
+ * ------------------------------------------------------------------ */
+
+details > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  transition: color var(--dur-short) var(--ease-emphasized);
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg) translate(-1px, 1px);
+  transition: transform var(--dur-short) var(--ease-emphasized);
+}
+
+details > summary:hover {
+  color: var(--ink);
+}
+
+details[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+/* Ajustes móviles de la ruta: van al final para ganar a las reglas base. */
+@media (max-width: 1023px) {
+  .ruta-pin {
+    width: 24px;
+    min-height: 24px;
+  }
+
+  .ruta-pin-index {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    border-width: 1.5px;
+  }
+
+  .ruta-pin-label {
+    display: none;
+  }
 }

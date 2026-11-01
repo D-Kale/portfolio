@@ -1,38 +1,158 @@
 :root {
-  --paper: #f4efe5;
-  --paper-deep: #e9e1d0;
-  --ink: #14181f;
-  --ink-soft: #45506030;
-  --route: #c0392b;
-  --route-soft: #c0392b1a;
-  --jungle: #1f5e42;
-  --sun: #e8a33d;
-  --sky: #2b6cb0;
+  /* ---- Superficies: rampa M3 de base fría, derivada del azul-noche ---- */
+  --surface-lowest: #0d0e13;
+  --surface-low: #11131a;
+  --surface: #161923;
+  --surface-high: #1c202c;
+  --surface-highest: #222736;
 
-  --font-display: 'Bricolage Grotesque Variable', Georgia, serif;
+  /* Elevación como tinte de superficie (M3), no como sombra */
+  --elev-0: var(--surface-lowest);
+  --elev-1: var(--surface-low);
+  --elev-2: var(--surface);
+  --elev-3: var(--surface-high);
+  --elev-4: var(--surface-highest);
+  --elev-route: color-mix(in oklab, var(--route) 9%, var(--surface-high));
+
+  /* Alias heredados (no romper componentes) */
+  --bg: var(--surface-lowest);
+  --surface-hover: var(--surface-high);
+
+  /* ---- Tinta y contornos ---- */
+  --ink: #e8eaf0;
+  --ink-soft: #8f95a8;
+  --ink-muted: #5c6377;
+  --outline: #6b7186;
+  --outline-variant: #383d4c;
+
+  /* ---- Acentos ---- */
+  --route: #f59e0b;
+  --route-hi: #fbbf24;
+  --route-soft: color-mix(in oklab, var(--route) 14%, transparent);
+  --jungle: #34d399;
+  --sky: #60a5fa;
+
+  /* ---- Tipografía ---- */
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  --space-xs: 0.5rem;
-  --space-s: 1rem;
-  --space-m: 1.5rem;
+  /* ---- Espacio ---- */
   --space-l: 2.5rem;
   --space-xl: 4rem;
 
-  --radius-s: 6px;
-  --radius-m: 12px;
-  --shadow-card: 0 2px 8px rgba(20, 24, 31, 0.08);
+  /* ---- Forma (M3 shape scale) ---- */
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-l: 28px;
 
-  --motion-fast: 150ms;
-  --motion-base: 250ms;
+  /* ---- Sombra: solo para lo que flota de verdad ---- */
+  --shadow-float: 0 24px 48px -24px rgba(0, 0, 0, 0.9);
+  --shadow-card: var(--shadow-float);
+
+  /* ---- Motion (M3 easing + duración) ---- */
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-short: 150ms;
+  --dur-medium: 300ms;
+  --dur-long: 500ms;
+  --motion-draw: 1400ms;
+
+  /* Alias heredados */
+  --ease-out: var(--ease-emphasized);
+  --motion-fast: var(--dur-short);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  blockquote {
+    text-wrap: pretty;
+  }
+
+  code,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  a {
+    color: var(--route);
+    text-underline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--route);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: var(--route);
+    color: var(--bg);
+  }
+
+  * {
+    scrollbar-color: var(--outline) var(--bg);
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-high);
+    border: 2px solid var(--bg);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--outline);
+  }
+
+  [id] {
+    scroll-margin-top: 2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
