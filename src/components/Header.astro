@@ -9,21 +9,24 @@ const { lang } = Astro.props;
 const t = ui_for(lang);
 const other: Locale = lang === 'es' ? 'en' : 'es';
 const links = [
-  { href: localePath[lang], label: lang === 'es' ? 'inicio' : 'home' },
-  { href: `${localePath[lang]}#ruta`, label: 'ruta' },
+  { href: `${localePath[lang]}#ruta`, label: lang === 'es' ? 'ruta' : 'route' },
   { href: `${localePath[lang]}#taller`, label: lang === 'es' ? 'taller' : 'work' },
-  { href: `${localePath[lang]}#cajuela`, label: 'cajuela' },
+  { href: `${localePath[lang]}#comunidad`, label: lang === 'es' ? 'comunidad' : 'community' },
+  { href: `${localePath[lang]}#cajuela`, label: lang === 'es' ? 'cajuela' : 'trunk' },
 ];
 ---
 
-<header class="border-b border-[var(--ink-soft)]">
-  <nav aria-label={lang === 'es' ? 'principal' : 'main'} class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
-    <a href={localePath[lang]} class="text-lg font-bold no-underline">Andrés Sánchez</a>
-    <ul class="flex items-center gap-4">
+<header class="border-b border-[var(--ink-soft)]/40">
+  <nav aria-label={lang === 'es' ? 'principal' : 'main'} class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
+    <a href={localePath[lang]} class="inline-flex min-h-8 items-center text-lg font-bold text-[var(--ink)] no-underline">Andrés Sánchez</a>
+    <ul class="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-3">
       {
         links.map((l) => (
           <li>
-            <a class="text-sm no-underline hover:text-[var(--route)]" href={l.href}>
+            <a
+              class="inline-flex min-h-8 items-center rounded-[var(--radius-s)] px-2 text-sm text-[var(--ink)] no-underline hover:bg-[var(--surface-hover)] hover:text-[var(--route)]"
+              href={l.href}
+            >
               {l.label}
             </a>
           </li>
@@ -34,7 +37,7 @@ const links = [
           href={localePath[other]}
           hreflang={other}
           aria-label={lang === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
-          class="rounded border border-[var(--ink-soft)] px-2 py-1 font-[var(--font-mono)] text-xs no-underline hover:bg-[var(--paper-deep)]"
+          class="inline-flex min-h-8 items-center rounded border border-[var(--ink-soft)] px-2 font-[var(--font-mono)] text-xs text-[var(--ink)] no-underline hover:bg-[var(--surface-hover)]"
         >
           {t['lang.toggle']}
         </a>

@@ -1,12 +1,12 @@
 const ui = {
   es: {
-    'site.title': 'Andrés Sánchez — Ingeniero en Cibernética y desarrollador',
+    'site.title': 'Andrés Sánchez — Desarrollador full-stack en León',
     'site.description':
       'Construyo sistemas modernos con Go, Astro y comunidad en Nicaragua. Portafolio de Andrés Sánchez.',
     'lang.toggle': 'EN',
   },
   en: {
-    'site.title': 'Andrés Sánchez — Cybernetics engineer & developer',
+    'site.title': 'Andrés Sánchez — Full-stack developer in León',
     'site.description':
       'I build modern systems with Go, Astro and community in Nicaragua. Andrés Sánchez’s portfolio.',
     'lang.toggle': 'ES',

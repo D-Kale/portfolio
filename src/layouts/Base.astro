@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
 
 interface Props {
   title: string;
@@ -9,6 +12,7 @@ interface Props {
 
 const { title, description, lang = 'es' } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
+const ogLocale = lang === 'es' ? 'es_NI' : 'en_US';
 ---
 
 <!doctype html>
@@ -17,25 +21,25 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : As
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b0c10" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="es" href={Astro.site ? new URL('/', Astro.site).href : '/'} />
     <link rel="alternate" hreflang="en" href={Astro.site ? new URL('/en/', Astro.site).href : '/en/'} />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary" />
   </head>
-  <body class="min-h-screen bg-[var(--paper)] text-[var(--ink)]">
+  <body class="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-[var(--ink)] focus:px-3 focus:py-2 focus:text-[var(--paper)]"
-      >Saltar al contenido</a
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-[var(--route)] focus:px-3 focus:py-2 focus:text-[var(--bg)] focus:no-underline"
+      >{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a
     >
     <slot />
   </body>
