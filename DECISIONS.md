@@ -45,6 +45,8 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - (2026-10-30) Los pins del mapa se desplazaban ~8px: en la capa HTML el `top` es un **porcentaje**, no una coordenada del `viewBox`. El factor `Y = 0.64` solo aplica dentro del SVG. Lección: un mismo sistema de coordenadas no puede tener dos unidades.
 - (2026-10-30) Dos bugs de CSS que costaron tiempo: `bg-white` en tarjetas sobre fondo oscuro, y `a { color: var(--route) }` sin `@layer base` (ganaba a las utilities de Tailwind). Lección: en Tailwind v4, **toda** regla base debe vivir en `@layer base` y `global.css` importa `tailwindcss` **antes** de `tokens.css`.
 - (2026-10-31) Los pines del mapa eran anclas con `width: 0`: sin caja propia el objetivo de toque quedaba en 18px (WCAG 2.2 exige 24px) y Playwright los reportaba como "not visible". Lección: un ancla con hijos posicionados necesita caja propia (`width`/`min-height`), no solo hijos visibles.
+- (2026-11-01) El logotipo tipográfico de Waresis (`waresis-full.png`) llega **cortado en los extremos** del lienzo: la W y la S final están truncadas, y el recorte automático no lo arregla. Lección: un asset de marca hay que mirarlo sobre su fondo real antes de publicarlo; se usou la marca "W" y el archivo quedó en cuarentena.
+- (2026-11-01) La foto del escenario de TEDx estaba duplicada en disco: `public/assets/techday/techday-escenario-aval-blivar.webp` (sin trackear) y `public/assets/tedx/tedx-escenario-aval-blivar.webp` (trackeada). Como las imágenes lazy no se solicitaban hasta hacer scroll, el 404 no aparecía en las pruebas. Lección: probar con scroll real y no solo con `complete && naturalWidth === 0` en la carga inicial.
 
 ## 2026-10-30 · Dirección visual v3: M3 de base fría + acento ámbar (Opción B)
 
@@ -83,6 +85,18 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - **Decisión**: `src/data/brands.ts` centraliza los iconos de `simple-icons` y `BrandMark.astro` los emite como SVG inline `currentColor` + `aria-hidden`; el logo de ULSA es el archivo real (`public/assets/ULSA/ulsa-logo.webp`). Cada parada es un `<li tabindex="-1">` para que el ancla del pin **mueva el foco** a la tarjeta, y el skip link se localiza por `lang`.
 - **Por qué**: identificar con logo real (nunca inventado) acelera la lectura, y mover el foco al target del ancla es lo que hace que el mapa sea usable con teclado y no solo navegable con mouse.
 - **Alternativas descartadas**: dejar el foco en el pin (el lector de pantalla anuncia el pin, no la historia); iconos genéricos por falta de archivo (mentira visual).
+
+## 2026-11-01 · Logos de marca sobre placa clara
+
+- **Decisión**: los logos oficiales con tinta oscura (TEDx Avenida Bolívar, Cisco Networking Academy, Harvard CS50, ULSA) se muestran sobre una **placa clara** (`--logo-plate`, gris frío #d9dce4) dentro de un sitio oscuro; los que ya son claros (Aspire, marca de Waresis) van directos sobre el fondo. Waresis, que no tiene producto público todavía, usa su marca "W" como portada de tarjeta en vez de una foto.
+- **Por qué**: un logo institucional de tinta negra sobre un sitio casi negro no se ve. La placa conserva el color real de la marca (no lo filtra ni lo invierte) y hace que la evidencia sea legible de un vistazo. Seevitó el blanco puro (#f2f2ee) porque resaltaba más que el contenido.
+- **Alternativas descartadas**: `filter: invert()` o brillo sobre el logo (falsea el color de marca); chips de texto con simple-icons (son más consistentes, pero no son el logo real que respalda la evidencia); una placa por cada logo con tono distinto (serían cinco sistemas, no uno).
+
+## 2026-11-01 · Formación pasa a ser sección propia
+
+- **Decisión**: "Formación" dejó de ser un sub-bloque dentro de "Comunidad": ahora es una sección de primer nivel con `id="formacion"` y su enlace en el header.
+- **Por qué**: cada `h2` del sitio es una sección con ancla y ruta de lectura propia. Con la formación dentro de comunidad, el encabezado quedaba al mismo nivel que una sección y la navegación no ofrecía forma de llegar a la evidencia de formación (CS50, Cisco, Aspire).
+- **Alternativa descartada**: mantenerlo anidado y no tocar el header (menos cambios, pero la IA queda desalineada con los títulos).
 
 ## Pendientes documentados (fase 2, post-deadline)
 
