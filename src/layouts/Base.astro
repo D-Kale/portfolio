@@ -23,6 +23,21 @@ const ogLocale = lang === 'es' ? 'es_NI' : 'en_US';
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0b0c10" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // El tema se fija antes de pintar: si no, la pagina parpadea.
+      document.documentElement.classList.add('js');
+      let theme = 'dark';
+      try {
+        const saved = localStorage.getItem('tema');
+        theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      } catch {
+        theme = 'dark';
+      }
+      document.documentElement.dataset.theme = theme;
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', theme === 'light' ? '#ffffff' : '#0b0c10');
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -44,3 +59,24 @@ const ogLocale = lang === 'es' ? 'es_NI' : 'en_US';
     <slot />
   </body>
 </html>
+
+<script>
+  // Entrada de los bloques al entrar en pantalla. Sin JS el contenido
+  // se muestra tal cual: la clase .js decide si hay animacion.
+  const targets = document.querySelectorAll('.reveal');
+
+  if (targets.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

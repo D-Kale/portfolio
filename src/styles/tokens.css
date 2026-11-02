@@ -28,6 +28,10 @@
   /* Placa clara para logos de marca con tinta oscura (TEDx, Cisco, CS50, ULSA). */
   --logo-plate: #d9dce4;
 
+  /* Asfalto: la calzada es mas oscura que la vera en ambos temas. */
+  --road-shoulder: var(--surface-high);
+  --road-bed: color-mix(in oklab, var(--ink-muted) 42%, var(--surface-low));
+
   /* ---- Acentos ---- */
   --route: #f59e0b;
   --route-hi: #fbbf24;
@@ -42,6 +46,9 @@
   /* ---- Espacio ---- */
   --space-l: 2.5rem;
   --space-xl: 4rem;
+
+  /* Alto del header sticky: lo usan la placa del mapa y los anclajes. */
+  --header-h: 3.5rem;
 
   /* ---- Forma (M3 shape scale) ---- */
   --radius-xs: 4px;
@@ -68,10 +75,43 @@
   --motion-fast: var(--dur-short);
 }
 
+/* ---- Tema claro: mismo lenguaje, superficies frías y tinta oscura ---- */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --surface-lowest: #ffffff;
+  --surface-low: #f8f9fc;
+  --surface: #f1f3f8;
+  --surface-high: #e9ecf3;
+  --surface-highest: #e2e6ef;
+
+  --ink: #171a22;
+  --ink-soft: #545b6e;
+  --ink-muted: #6b7280;
+  --outline: #6f7688;
+  --outline-variant: #d3d8e3;
+
+  --logo-plate: #e6e9f1;
+
+  --road-shoulder: #e7eaf2;
+  --road-bed: #aeb5c4;
+
+  --route: #b45309;
+  --route-hi: #92400e;
+  --jungle: #047857;
+  --sky: #1d4ed8;
+
+  --shadow-float: 0 24px 48px -28px rgba(15, 23, 42, 0.28);
+}
+
 @layer base {
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+  }
+
+  [data-theme='light'] {
+    color-scheme: light;
   }
 
   body {
@@ -145,7 +185,7 @@
   }
 
   [id] {
-    scroll-margin-top: 2rem;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
   }
 
   @media (prefers-reduced-motion: reduce) {
