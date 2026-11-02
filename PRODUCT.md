@@ -69,7 +69,7 @@ Contenido real, ya escrito y con fuente en el repositorio:
 - **Cierre** (`src/components/Contact.astro`): email, GitHub y LinkedIn reales, con el alcance internacional declarado (León, Managua y trabajo remoto).
 - **Enlaces reales**: GitHub (`D-Kale`), LinkedIn (charla de hackathon), `tedxavenidabolivar.com`, pkg.go.dev.
 - **Fotografías reales**: retrato, ULSA, La Gritería, Museo Ortiz Gurdian, La Merced, Boreal Labs en la Hackathon, interfaz de VoxLab, TechDay, WordCamp, VoxLab stand y equipo.
-- Capturas de referencia en `docs/screenshots/`.
+- Capturas de referencia en `docs/screenshots/` (WebP).
 
 Ausencias que el trabajo futuro **no debe fabricar**: métricas de usuarios o ingresos, testimonios de clientes, portfolio del club, el producto Waresis en producción, y cualquier despliegue ya realizado.
 

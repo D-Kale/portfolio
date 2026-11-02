@@ -34,9 +34,11 @@ src/
     index.astro           versión ES (raíz)
     en/index.astro        versión EN
 public/
-  assets/                 Fotos reales en WebP + manifest.json + README.md
+  assets/                 25 fotos WebP publicadas + manifest.json + README.md
   favicon.svg
-assets-review/            Recortes descartados (fuera del deploy, no se borran)
+assets-review/            Fotos revisadas que no se enlazan (fuera del deploy y del repo)
+docs/
+  screenshots/            Capturas de referencia en WebP
 ```
 
 ## Cómo se ejecuta (local)
@@ -76,17 +78,18 @@ El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo *
 
 ## Las imágenes
 
-Las fotos ya son reales: están en `public/assets/` en WebP (1400px, q80) y el retrato en `public/assets/portrait.webp`.
+Las fotos ya son reales y están en `public/assets/` en WebP (1400px, q80); el retrato en `public/assets/portrait.webp` (800x1000, 4:5).
 
-- `public/assets/manifest.json` inventaría cada archivo con su evento y su alt.
-- `public/assets/README.md` explica el criterio de recorte y los nombres.
-- `assets-review/` guarda los recortes que **no** se usan (no se deployan, no se borran) por si más adelante sirven.
-- Los 13 descartes salieron del deploy: el sitio pasó de 19 MB a 7,8 MB de assets.
+- Se revisaron **91** imágenes y se publican **25**: 1,9 MB de assets.
+- `public/assets/manifest.json` inventaría cada archivo publicado con su origen, evento y sección.
+- `public/assets/README.md` lista qué se publica, por qué, y la regla de curateo.
+- `assets-review/` guarda el resto (fotos validas no enlazadas, descartes y originales PNG de logos): **fuera del deploy y fuera del repo**, no se borran por si más adelante sirven.
+- Regla: **una imagen se publica si y solo si el sitio la enlaza.** Los PNG de las capturas de referencia en `docs/screenshots/` también son WebP.
 
 Para cambiar una foto: reemplazar el archivo conservando el nombre (o actualizar el `image`/`alt` en `src/data/route.ts`, `src/data/projects.ts` o `src/data/community.ts`) y volver a compilar. Si agregas una tecnología al stack sin logo en simple-icons, `src/data/tech.ts` la deja como chip de texto automáticamente.
 
 ## Próximo paso
 
-El sitio está completo y verificado en local: build pasa, `astro check` limpio, navegación por teclado OK, móvil y EN incluidos.
+El sitio está completo y verificado en local: build pasa, `astro check` limpio, navegación por teclado OK, contraste AA en ambos temas, móvil y EN incluidos.
 
-**No subo nada hasta tu orden explícita.** Cuando digas, crearé el repo en GitHub, conectaré AWS Amplify Hosting (tu región us-east-2) y subiré con commits pequeños ya organizados en la historia de git.
+El repositorio está en GitHub. Falta el despliegue real: conectar AWS Amplify Hosting (región us-east-2) para que cada `push` a `main` reconstruya y publique. El plan está en `docs/DEPLOY-PLAN.md`.
