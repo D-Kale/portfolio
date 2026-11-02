@@ -26,9 +26,10 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 
 ## 2026-10-28 · Trabajo local hasta orden explícita
 
-- **Décision**: nada sale a GitHub ni a AWS hasta que Andrés lo pida.
+- **Décisión**: nada sale a GitHub ni a AWS hasta que Andrés lo pida.
 - **Por qué**: control total de lo que se publica durante el challenge.
 - **Nota**: presupuesto AWS al día de hoy: plan FREE, $100 créditos, expiran **2027-04-28**. Región: **us-east-2**.
+- **Estado**: **superado el 2026-11-02** — Andrés dio la orden explícita y el portfolio ya está publicado en `https://main.dxe9dwv4bjpro.amplifyapp.com` (ver la entrada de despliegue más abajo).
 
 ## 2026-10-28 · Infraestructura mínima el día del deploy
 
@@ -128,6 +129,21 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - **Decisión**: hero, sección de contacto y footer dicen León (base), Managua (equipos) y trabajo remoto (clientes fuera del país). El badge del hero pasó de "freelance y open source" a "freelance y trabajo remoto".
 - **Por qué**: la versión `/en` ya existía, pero el texto en español sugería que el trabajo se quedaba en el país. Decirlo de frente abre la puerta sin inventar clientes fuera del país.
 - **Alternativas descartadas**: una sección nueva de "servicios por país" (más copy, menos evidencia); quitar la referencia a Managua (es real: Flutter Meetup, TechDay, WordCamp).
+
+## 2026-11-02 · Despliegue real en AWS Amplify Hosting (us-east-2)
+
+- **Décisión**: app `andresportfolio` (app id `dxe9dwv4bjpro`) en AWS Amplify Hosting, región **us-east-2**, conectada a `github.com/D-Kale/portfolio` con **auto-build en push a `main`**. Build spec `amplify.yml` (Node 22 + pnpm 11 + `pnpm install --frozen-lockfile` + `pnpm build`, artefactos en `dist`). Variable de entorno `SITE_URL` en la rama, para que el `canonical` de Astro apunte al dominio desplegado. URL viva: `https://main.dxe9dwv4bjpro.amplifyapp.com`.
+- **Por qué**: la rúbrica del Student Builder Challenge exige URL pública viva y acceso a la AWS. La conexión se hizo **por CLI** (`aws amplify create-app --platform WEB_COMPUTE --access-token <PAT de gh>`), sin abrir la consola ni instalar la GitHub App a mano: `gh` ya estaba autenticado con scope `repo`.
+- **Aprendizaje**: `platform WEB_COMPUTE` exige `deploy-manifest.json` en la salida del build (es el camino de compute/SSR). Para un sitio 100% estático hay que cambiar la app a `platform WEB` (`aws amplify update-app --platform WEB`) y los artefactos se despliegan tal cual. El build en sí era correcto: el fallo era del modelo de hosting, no del build spec.
+- **Aprendizaje**: el build spec se aplicó sin cambios, pero el `preBuild` instala `pnpm` global (`npm install -g pnpm@11`) porque la imagen AL2023 de Amplify trae Node 22 y no pnpm; `nvm install 22` + `nvm use 22` funciona porque el shell de build corre bajo nvm.
+- **Aprendizaje**: `aws amplify start-job` solo acepta `jobType` ∈ {MANUAL, RELEASE, RETRY, WEB_HOOK}. Para disparar un build a mano: `RELEASE`.
+- **Alternativa descartada**: deploy manual con `create-deployment --file-map` (subir el `dist` ya construido). Funciona, pero pierde el auto-deploy: cada cambio futuro exigiría un build local más una subida. Con la app conectada a GitHub, el push dispara el build solo.
+
+## 2026-11-02 · Sección "Superpoderes técnicos", link al repo y pista visible a la ruta
+
+- **Décisión**: tres cambios para cubrir los requisitos del challenge: (1) sección nueva `id="superpowers"` ("Superpoderes técnicos" / "Tech superpowers") con el stack real agrupado en cuatro bloques —Lenguajes, Backend y datos, Frontend y producto, Infraestructura y nube— reusando `TechChip.astro` y `simple-icons`; (2) los links de GitHub del hero, contacto y footer apuntan al **repositorio** `D-Kale/portfolio` (el perfil queda como link secundario "Perfil/Profile" en el footer); (3) el hero incluye una **pista visible** —un bloque con flecha hacia `#ruta`— que anuncia la carretera y sus 78 km.
+- **Por qué**: la rúbrica pide tres secciones núcleo (About Me, Skills/Tech Superpowers, Projects/Achievements), un link al repositorio GitHub y que la feature creativa tenga una pista visible. El sitio tenía las dos primeras por separado pero "Formación" es educación, no skills: los chips de stack solo vivían dentro de las tarjetas de proyecto y el link de GitHub llevaba al perfil, no al repo.
+- **Alternativas descartadas**: renombrar "Formación" a "Skills" (mentiría: es educación y credenciales); reutilizar la sección de formación como skills (mezcla dos cosas distintas); poner el bloque de skills dentro del hero (el hero ya carga con la presentación y el retrato); quiver de iconos con `simple-icons` inventados para AWS (el catálogo no trae logo de AWS: el chip queda como texto, igual que `sqlc` o `Blade`).
 
 ## Pendientes documentados (fase 2, post-deadline)
 

@@ -1,6 +1,9 @@
 # Plan de despliegue — mañana por la mañana
 
-Estado: **hoy el repo está en GitHub. Falta publicarlo.**
+Estado: **publicado el 2026-11-02.** App `andresportfolio` (`dxe9dwv4bjpro`) en
+AWS Amplify Hosting, región us-east-2, conectada a `D-Kale/portfolio` con
+auto-build en push a `main`.
+URL viva: **https://main.dxe9dwv4bjpro.amplifyapp.com**
 El sitio es 100% estático (Astro → HTML/CSS/SVG). No hay backend, ni base de
 datos, ni autenticación, ni claves.
 
@@ -10,11 +13,12 @@ datos, ni autenticación, ni claves.
 
 | Requisito | Estado | Nota |
 |---|---|---|
-| Cuenta AWS con sesión activa | **Caducada** | `aws login` antes de empezar (ver §1) |
+| Cuenta AWS con sesión activa | **Hecho** | `aws login --profile aws-toolkit --region us-east-2` |
 | Región | **us-east-2** | ya en `~/.aws/config`, perfil `aws-toolkit` |
-| Plan de la cuenta | Pendiente de verificar | `aws freetier get-account-plan-state` |
+| Plan de la cuenta | **FREE, $100 créditos** | expiran 2027-04-28 · `aws freetier get-account-plan-state` |
 | Repo en GitHub | **Hecho** | `D-Kale/portfolio` |
 | Build spec en el repo | **Hecho** | `amplify.yml` en la raíz |
+| App de Amplify | **Hecho** | `dxe9dwv4bjpro`, rama `main`, `SITE_URL` configurada |
 
 ---
 
@@ -35,31 +39,37 @@ desplegar, para que una runaway build nopause el proyecto.
 
 ## 2. Crear la app de Amplify Hosting (10 min)
 
-Opción A — consola (más simple, recomendada):
-
-1. AWS Console → **Amplify** → **New app** → **Hosting** → **GitHub**.
-2. Autorizar la GitHub App: solo el repositorio `D-Kale/portfolio` (permiso
-   mínimo, no "all repositories").
-3. Elegir el repositorio y la rama `main`.
-4. En **Environment variables** agregar:
-   - `SITE_URL` = `https://<app-id>.amplifyapp.com` (el dominio que Amplify
-     asigne; se puede cambiar después con un dominio propio).
-5. Revisar el build spec que Amplify autodetectó. Debe coincidir con
-   `amplify.yml`: Node 22, `pnpm install --frozen-lockfile`, `pnpm build`,
-   artefactos en `dist`.
-6. **Save and deploy**.
-
-Opción B — CLI:
+**Lo que se hizo (CLI, sin consola y sin instalar la CLI de Amplify):**
 
 ```bash
-npm install -g @aws-amplify/cli
-amplify init --app-id <APP_ID> --envName main --region us-east-2
-amplify add hosting
-amplify push
+export GH_TOKEN="$(gh auth token)"
+
+aws amplify create-app \
+  --name andresportfolio \
+  --platform WEB_COMPUTE \
+  --repository https://github.com/D-Kale/portfolio \
+  --access-token "$GH_TOKEN" \
+  --build-spec file://amplify.yml \
+  --enable-branch-auto-build \
+  --profile aws-toolkit --region us-east-2
+
+# platform WEB_COMPUTE es el camino de compute: exige deploy-manifest.json.
+# Para un sitio 100% estático se cambia a platform WEB:
+aws amplify update-app --app-id <APP_ID> --platform WEB
+
+aws amplify create-branch \
+  --app-id <APP_ID> --branch-name main --enable-auto-build \
+  --environment-variables SITE_URL=https://main.<APP_ID>.amplifyapp.com
+
+aws amplify start-job --app-id <APP_ID> --branch-name main --job-type RELEASE
 ```
 
-> La CLI de Amplify **no es necesaria**: `amplify.yml` + la GitHub App bastan.
-> La opción A deja menos superficie que mantener.
+> `gh` ya estaba autenticado con scope `repo`, así que el token sirvió como
+> credencial de GitHub para la app: no hizo falta abrir la consola ni instalar
+> la GitHub App a mano.
+> `start-job` solo acepta `jobType` ∈ {MANUAL, RELEASE, RETRY, WEB_HOOK}.
+> Tras esto, **cada push a `main` dispara el build solo** (job 3 = primer
+> auto-deploy).
 
 ---
 
@@ -74,6 +84,7 @@ En la consola de Amplify, la pestaña **Build history** debe terminar en
 | `ERR_PNPM_OUTDATED_LOCKFILE` | el lockfile no coincide | `pnpm install` local y commitear el lockfile |
 | `Cannot find module 'astro'` | `--frozen-lockfile` falló | revisar `preBuild` |
 | canonical apunta al dominio viejo | falta `SITE_URL` | agregar la variable de entorno y re-deploy |
+| `Failed to find the deploy-manifest.json file` | la app quedó en `platform WEB_COMPUTE` (camino de compute/SSR) | `aws amplify update-app --platform WEB` — el build estaba bien, el modelo de hosting no |
 
 Comprobación local antes de tocar la consola:
 

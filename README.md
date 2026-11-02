@@ -88,8 +88,20 @@ Las fotos ya son reales y están en `public/assets/` en WebP (1400px, q80); el r
 
 Para cambiar una foto: reemplazar el archivo conservando el nombre (o actualizar el `image`/`alt` en `src/data/route.ts`, `src/data/projects.ts` o `src/data/community.ts`) y volver a compilar. Si agregas una tecnología al stack sin logo en simple-icons, `src/data/tech.ts` la deja como chip de texto automáticamente.
 
-## Próximo paso
+## Despliegue
 
-El sitio está completo y verificado en local: build pasa, `astro check` limpio, navegación por teclado OK, contraste AA en ambos temas, móvil y EN incluidos.
+El sitio está **publicado en AWS**:
 
-El repositorio está en GitHub. Falta el despliegue real: conectar AWS Amplify Hosting (región us-east-2) para que cada `push` a `main` reconstruya y publique. El plan está en `docs/DEPLOY-PLAN.md`.
+- **URL**: https://main.dxe9dwv4bjpro.amplifyapp.com (canonical y `SITE_URL` apuntan ahí)
+- **Servicio**: AWS Amplify Hosting, app `andresportfolio` (`dxe9dwv4bjpro`), región **us-east-2**
+- **Pipeline**: push a `main` en `D-Kale/portfolio` → build automático con `amplify.yml` (Node 22 + pnpm 11) → deploy + verify
+- **Variables**: `SITE_URL` en la rama `main` (nunca access keys en el repo)
+
+Rebuild manual:
+
+```bash
+aws amplify start-job --app-id dxe9dwv4bjpro --branch-name main \
+  --job-type RELEASE --profile aws-toolkit --region us-east-2
+```
+
+El detalle de los comandos, los fallos previstos y el plan completo están en `docs/DEPLOY-PLAN.md`; las decisiones y aprendizajes del deploy, en `DECISIONS.md`.
