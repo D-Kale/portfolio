@@ -287,6 +287,29 @@ const startAngle =
         requestAnimationFrame(render);
       };
 
+      // En movil la tarjeta vive al final de su parada: el ancla sola la deja
+      // a medias bajo la placa. Se scrollea a la tarjeta, justo debajo.
+      // La placa es sticky: su rect actual no sirve hasta que se pega, asi que
+      // el offset se calcula con la geometria pegada (header + alto de placa).
+      const plate = root.querySelector<HTMLElement>('.ruta-visual');
+      const header = document.querySelector<HTMLElement>('[data-site-header]');
+
+      pins.forEach((pin) => {
+        pin.addEventListener('click', (event) => {
+          if (wide.matches || !plate || !header) return;
+          const id = pin.getAttribute('href')?.slice(1);
+          const stop = id ? document.getElementById(id) : null;
+          const card = stop?.querySelector<HTMLElement>('.ruta-card');
+          if (!card || !stop) return;
+          event.preventDefault();
+          const offset = header.offsetHeight + plate.offsetHeight + 12;
+          const top = card.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+          history.replaceState(null, '', `#${id}`);
+          stop.focus({ preventScroll: true });
+        });
+      });
+
       if (calm.matches) {
         travel.style.strokeDasharray = `0 ${total}`;
       } else {
