@@ -1,4 +1,4 @@
-**Live:** https://main.dxe9dwv4bjpro.amplifyapp.com · **Repo:** https://github.com/D-Kale/portfolio
+**[Live site](https://main.dxe9dwv4bjpro.amplifyapp.com)** · **[GitHub repo](https://github.com/D-Kale/portfolio)**
 
 Andrés Sánchez, full-stack developer from León, Nicaragua, studying Cybernetic Electronic Engineering at ULSA.
 
@@ -6,13 +6,13 @@ Andrés Sánchez, full-stack developer from León, Nicaragua, studying Cyberneti
 
 Most portfolios are a list of projects. Mine is a road: my career as a **78 km highway** from León to the online work. Scroll and a truck drives the asphalt, the road behind it turns amber, and the nearest stop opens with the real evidence.
 
-![Hero con la pista hacia la ruta](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/hero.webp)
+![Portfolio hero with the visible route hint](https://prod-assets.cosmic.aws.dev/a/3LYs9nszZhJTOTV589pQRePEj77/hero-crop-jpg.webp)
 
 - One SVG plate draws the asphalt plus a "traveled" stroke that fills as you scroll.
 - A ~1.6 KB vanilla script places the truck with `path.getPointAtLength()` and banks it through every curve. No framework, no animation library.
 - Seven real stops — technical and human alike — each linking to real photos, logos and repos. On mobile the plate sticks and tapping a milestone scrolls its card into place.
 
-![La Ruta: el camión con la parada activa](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/ruta.webp)
+![La Ruta: the scroll-driven highway and its stops](https://prod-assets.cosmic.aws.dev/a/3LYrrZlNsjq16OZflsvbLILS2ul/ruta-crop-jpg.webp)
 
 **The visible hint:** the hero closes with an explicit "Abajo hay una ruta" block and a strip of asphalt.
 
@@ -22,7 +22,7 @@ Most portfolios are a list of projects. Mine is a road: my career as a **78 km h
 
 ## AWS setup
 
-![Amplify: deployment 3 deployed, con dominio, repo, commit y build duration](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/aws-deployments.webp)
+![AWS Amplify: deployment pipeline for main](https://prod-assets.cosmic.aws.dev/a/3LYqs1VjhBt54mtR9Qq4mSp6SIl/aws-.webp)
 
 - **AWS Amplify Hosting** serves the site in **us-east-2** (this project's Region), with HTTPS and CDN.
 - **Continuous delivery**: `D-Kale/portfolio` → `main` → build → deploy → verify on every push — that pipeline is the screenshot.

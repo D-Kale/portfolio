@@ -63,7 +63,7 @@ El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo *
 | Idiomas | ES raíz + `/en` toggle (routing manual, sin dependencias) |
 | JavaScript | **mínimo**: scripts vanilla inline (~3,8 KB / ~2 KB gzip, sin dependencias) para el camión scroll-driven, el resalte pin ↔ tarjeta, el toggle de tema, el menú móvil y la animación de entrada. Sin hidratación, sin librerías, sin framework |
 | Calidad | `astro check`, pruebas de teclado, `prefers-reduced-motion`, Lighthouse |
-| Despliegue (pendiente tu orden) | GitHub → AWS Amplify Hosting (GitHub App, sin claves en repo) |
+| Despliegue | GitHub → AWS Amplify Hosting (app `andresportfolio`, us-east-2, sin claves en repo) |
 | Backend (fase 2) | API Gateway HTTP + Lambda Go (`provided.al2023`) + DynamoDB on-demand |
 
 ## Decisiones clave (ver DECISIONS.md)
@@ -105,3 +105,9 @@ aws amplify start-job --app-id dxe9dwv4bjpro --branch-name main \
 ```
 
 El detalle de los comandos, los fallos previstos y el plan completo están en `docs/DEPLOY-PLAN.md`; las decisiones y aprendizajes del deploy, en `DECISIONS.md`.
+
+### AWS Student Builder Challenge
+
+- **Post**: https://builder.aws.com/post/3LYmyzW16ntuGH17fnVePQI5RaK_h
+- **Proyecto**: https://builder.aws.com/project/3LLA6qZzKXVDF18kaMkIfUuGdNc/la-ruta-a-scroll-driven-career-highway-deployed-on-aws-amplify-hosting
+- **Write-ups**: `docs/HACKATHON-POST.md` (texto publicado) y `docs/HACKATHON-ENTRY.md` (versión extendida)

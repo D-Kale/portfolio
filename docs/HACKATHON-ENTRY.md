@@ -1,5 +1,7 @@
 **Live:** https://main.dxe9dwv4bjpro.amplifyapp.com · **Repo:** https://github.com/D-Kale/portfolio
 
+> Published on AWS Builder Center: [post](https://builder.aws.com/post/3LYmyzW16ntuGH17fnVePQI5RaK_h) · [project](https://builder.aws.com/project/3LLA6qZzKXVDF18kaMkIfUuGdNc/la-ruta-a-scroll-driven-career-highway-deployed-on-aws-amplify-hosting). The published version is `docs/HACKATHON-POST.md`.
+
 I'm Andrés Sánchez, a full-stack developer from León, Nicaragua, studying Cybernetic Electronic Engineering at ULSA.
 
 ## The creative feature: La Ruta
