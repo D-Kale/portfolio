@@ -14,17 +14,22 @@ const rest = list.filter((p) => !p.featured);
 const es = lang === 'es';
 const techLabel = es ? 'Tecnologías' : 'Technologies';
 const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
+const moreLabel = es ? 'Más proyectos' : 'More projects';
 ---
 
-<ul class="grid gap-6">
+<ul class="grid gap-8">
   {
-    featured.map((p) => (
-      <li class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] transition-colors duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:bg-[var(--elev-2)]">
+    featured.map((p, i) => (
+      <li
+        class="reveal group overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] transition-[border-color,background-color] duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:border-[var(--outline)] hover:bg-[var(--elev-2)]"
+        style={`--i:${i}`}
+      >
+        <span class="block h-1 w-full bg-[var(--route)]" aria-hidden="true"></span>
         {p.image &&
           (p.imageFit === 'logo' ? (
-            <div class="flex items-center justify-center border-b border-[var(--outline-variant)] bg-[var(--elev-2)] px-8 py-16">
+            <div class="flex items-center justify-center border-b border-[var(--outline-variant)] bg-[var(--elev-2)] px-8 py-14">
               <img
-                class="h-48 w-auto"
+                class="h-40 w-auto transition-transform duration-[var(--dur-long)] ease-[var(--ease-standard)] group-hover:scale-[1.04]"
                 src={p.image}
                 alt={p.alt ?? ''}
                 width={p.imageWidth ?? 400}
@@ -35,7 +40,7 @@ const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
             </div>
           ) : (
             <img
-              class="aspect-[16/9] w-full object-cover"
+              class="aspect-[16/9] w-full object-cover transition-transform duration-[var(--dur-long)] ease-[var(--ease-standard)] group-hover:scale-[1.03]"
               src={p.image}
               alt={p.alt ?? ''}
               width="1400"
@@ -44,23 +49,23 @@ const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
               decoding="async"
             />
           ))}
-        <div class="grid gap-6 p-6 md:grid-cols-[1.4fr_1fr]">
+        <div class="grid gap-8 p-7 md:grid-cols-[1.45fr_1fr] md:p-9">
           <div>
             <p class="font-[var(--font-mono)] text-[12px] tracking-wide text-[var(--ink-soft)]">{p.year}</p>
-            <h3 class="mt-1 text-2xl font-bold">{p.title}</h3>
-            <p class="mt-1 text-sm text-[var(--ink-soft)]">{p.kind}</p>
-            <p class="mt-3 max-w-prose">{p.summary}</p>
+            <h3 class="mt-2 text-2xl font-bold md:text-3xl">{p.title}</h3>
+            <p class="mt-2 text-sm text-[var(--ink-soft)]">{p.kind}</p>
+            <p class="mt-5 max-w-prose leading-relaxed">{p.summary}</p>
             {p.depth.length > 0 && (
-              <details class="mt-4">
+              <details class="mt-6">
                 <summary>{depthLabel}</summary>
-                <ul class="mt-3 list-disc pl-5 text-sm text-[var(--ink)]/85">
+                <ul class="mt-4 list-disc space-y-1.5 pl-5 text-sm text-[var(--ink)]/85">
                   {p.depth.map((d) => <li>{d}</li>)}
                 </ul>
               </details>
             )}
             {p.links.length > 0 && (
-              <p class="mt-4 flex flex-wrap gap-x-4">
-                {p.links.map((l) => <a class="inline-flex min-h-6 items-center text-sm underline hover:text-[var(--route)]" href={l.href} rel="noopener">{l.label}</a>)}
+              <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+                {p.links.map((l) => <a class="inline-flex min-h-8 items-center text-sm underline underline-offset-4 hover:text-[var(--route)]" href={l.href} rel="noopener">{l.label}</a>)}
               </p>
             )}
           </div>
@@ -73,7 +78,7 @@ const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
             {p.gallery.map((g) => (
               <li class="bg-[var(--elev-1)]">
                 <img
-                  class="aspect-[4/3] w-full object-cover"
+                  class="aspect-[4/3] w-full object-cover transition-transform duration-[var(--dur-long)] ease-[var(--ease-standard)] group-hover:scale-[1.04]"
                   src={g.src}
                   alt={g.alt[lang]}
                   width="1400"
@@ -90,28 +95,33 @@ const depthLabel = es ? 'Qué hay debajo' : 'What is underneath';
   }
 </ul>
 
-<ul class="mt-6 grid gap-4 md:grid-cols-2">
+<h3 class="mt-14 text-xl font-bold md:text-2xl">{moreLabel}</h3>
+
+<ul class="mt-6 grid gap-6 md:grid-cols-2">
   {
-    rest.map((p) => (
-      <li class="rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] p-5 transition-colors duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:bg-[var(--elev-2)]">
+    rest.map((p, i) => (
+      <li
+        class="reveal rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] p-6 transition-[border-color,background-color,transform] duration-[var(--dur-medium)] ease-[var(--ease-standard)] hover:-translate-y-0.5 hover:border-[var(--outline)] hover:bg-[var(--elev-2)]"
+        style={`--i:${i}`}
+      >
         <p class="font-[var(--font-mono)] text-[12px] tracking-wide text-[var(--ink-soft)]">{p.year}</p>
-        <h3 class="mt-1 text-lg font-bold">{p.title}</h3>
+        <h4 class="mt-2 text-lg font-bold">{p.title}</h4>
         <p class="mt-1 text-sm text-[var(--ink-soft)]">{p.kind}</p>
-        <p class="mt-2 text-sm">{p.summary}</p>
-        <ul class="mt-3 flex flex-wrap gap-2" aria-label={techLabel}>
+        <p class="mt-3 text-sm leading-relaxed">{p.summary}</p>
+        <ul class="mt-4 flex flex-wrap gap-2" aria-label={techLabel}>
           {p.stack.map((s) => <TechChip name={s} />)}
         </ul>
         {p.depth.length > 0 && (
-          <details class="mt-3">
+          <details class="mt-4">
             <summary>{depthLabel}</summary>
-            <ul class="mt-2 list-disc pl-5 text-xs text-[var(--ink)]/80">
+            <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--ink)]/80">
               {p.depth.map((d) => <li>{d}</li>)}
             </ul>
           </details>
         )}
         {p.links.length > 0 && (
-          <p class="mt-3 flex flex-wrap gap-x-4">
-            {p.links.map((l) => <a class="inline-flex min-h-6 items-center text-xs underline hover:text-[var(--route)]" href={l.href} rel="noopener">{l.label}</a>)}
+          <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+            {p.links.map((l) => <a class="inline-flex min-h-8 items-center text-sm underline underline-offset-4 hover:text-[var(--route)]" href={l.href} rel="noopener">{l.label}</a>)}
           </p>
         )}
       </li>

@@ -87,7 +87,7 @@ export const projects: Project[] = [
         'ERP multi-tenant donde cada inquilino tiene su propia base de datos PostgreSQL. Aquí acabó la experiencia de la migración de La Casa del Soldador: hoy es un producto, no un proyecto de cliente.',
       depth: [
         'Database-per-tenant con landlord DB y middleware de tenancy.',
-        'SQL puro tipado con sqlc: sin ORM, einfache deliberada.',
+        'SQL puro tipado con sqlc: sin ORM, simpleza deliberada.',
         'Dashboard en Astro SSR + React islands.',
         'Archivos con go-storage adaptado a RustFS (MinIO quedó deprecado).',
       ],

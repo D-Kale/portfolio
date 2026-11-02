@@ -1,0 +1,54 @@
+---
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'es' } = Astro.props;
+const es = lang === 'es';
+---
+
+<section id="contacto" class="mt-[var(--space-xl)]" aria-labelledby="contacto-title">
+  <div class="reveal rounded-[var(--radius-l)] border border-[var(--outline-variant)] bg-[var(--elev-1)] p-7 md:p-10">
+    <h2 id="contacto-title" class="text-3xl font-bold md:text-4xl">
+      {es ? 'Trabajemos juntos' : 'Let’s work together'}
+    </h2>
+    <p class="mt-4 max-w-prose text-lg">
+      {
+        es
+          ? 'Mi base está en León, Nicaragua, y trabajo con equipos de Managua y con clientes fuera del país: el proyecto no tiene que estar en mi ciudad para que yo esté en él.'
+          : 'I’m based in León, Nicaragua, and I work with teams in Managua and with clients abroad: the project does not have to be in my city for me to be in it.'
+      }
+    </p>
+    <p class="mt-4 max-w-prose text-[var(--ink-soft)]">
+      {
+        es
+          ? 'Si tenés un producto que escalar, una API que ordenar o un equipo que necesita manos, escribime. Respondo con tiempo, no con plantillas.'
+          : 'If you have a product to scale, an API to straighten out or a team that needs hands, email me. I answer with time, not with templates.'
+      }
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="mailto:a3235633@gmail.com"
+        class="inline-flex min-h-10 items-center rounded-[var(--radius-s)] bg-[var(--route)] px-4 py-2 font-semibold text-[var(--bg)] no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:bg-[var(--route-hi)]"
+      >
+        {es ? 'Escríbeme' : 'Email me'}
+      </a>
+      <a
+        href="https://github.com/D-Kale"
+        rel="me"
+        class="inline-flex min-h-10 items-center rounded-[var(--radius-s)] border border-[var(--outline)] px-4 py-2 no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:bg-[var(--elev-2)] hover:text-[var(--ink)]"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://ni.linkedin.com/in/andressanchezsf"
+        rel="me"
+        class="inline-flex min-h-10 items-center rounded-[var(--radius-s)] border border-[var(--outline)] px-4 py-2 no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:bg-[var(--elev-2)] hover:text-[var(--ink)]"
+      >
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>

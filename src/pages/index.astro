@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 import RouteMap from '../components/RouteMap.astro';
 import Workshop from '../components/Workshop.astro';
 import CommunityEducation from '../components/CommunityEducation.astro';
-import Cajuela from '../components/Cajuela.astro';
+import Contact from '../components/Contact.astro';
 import { ui_for } from '../i18n/ui';
 
 const t = ui_for('es');
@@ -18,11 +18,13 @@ const t = ui_for('es');
   <section id="taller" class="mt-[var(--space-xl)]" aria-labelledby="taller-title">
     <h2 id="taller-title" class="text-3xl font-bold">El taller</h2>
     <p class="mt-2 max-w-prose text-[var(--ink-soft)]">
-      Los proyectos: un producto en incubación, un ERP que todavía no es público, librerías abiertas y piezas de investigación.
+      Un producto en incubación, un ERP que todavía no es público, librerías abiertas y piezas de
+      investigación. Cada proyecto dice qué es real y qué no: lo que no tiene cliente se presenta
+      como lo que es.
     </p>
     <Workshop lang="es" />
   </section>
 
   <CommunityEducation lang="es" />
-  <Cajuela lang="es" />
+  <Contact lang="es" />
 </Page>

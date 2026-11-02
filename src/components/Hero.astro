@@ -28,7 +28,7 @@ const portraitAlt = portraitFile
   class="mx-auto grid max-w-5xl gap-10 px-4 py-[var(--space-l)] md:grid-cols-[1.8fr_1fr] md:items-center"
 >
   <div>
-    <h1 class="text-[clamp(2.25rem,5vw,3.5rem)] font-extrabold leading-[1.06]">
+    <h1 class="text-[clamp(2.25rem,5vw,3rem)] font-extrabold leading-[1.06]">
       {es
         ? 'Brego sistemas modernos y comunidades que aprenden.'
         : 'I build modern systems and communities that learn.'}
@@ -37,25 +37,29 @@ const portraitAlt = portraitFile
       {
         es ? (
           <>
-            Soy <strong class="font-semibold">Andrés Sánchez</strong>, desarrollador full-stack en
-            León, Nicaragua. Estudio Ingeniería en Cibernética Electrónica en ULSA.{' '}
+            Soy <strong class="font-semibold">Andrés Sánchez</strong>, desarrollador full-stack.
+            Mi base está en León, Nicaragua, y trabajo con equipos de Managua y con clientes fuera
+            del país: el contexto cambia, la ingeniería no. Estudio Ingeniería en Cibernética
+            Electrónica en ULSA.{' '}
             <strong class="font-semibold text-[var(--route-hi)]">Go</strong> y{' '}
             <strong class="font-semibold text-[var(--route-hi)]">Astro</strong> son mis
-            herramientas diarias: no vivo sin <strong class="font-semibold">Docker</strong> ni sin
-            un VPS con <strong class="font-semibold">nginx</strong> que{' '}
-            <strong class="font-semibold">GitHub Actions</strong> despliega limpio. Diseño
-            arquitectura y me duele el detalle de la interfaz.
+            herramientas diarias; <strong class="font-semibold">Docker</strong> y un VPS con{' '}
+            <strong class="font-semibold">nginx</strong> desplegado por{' '}
+            <strong class="font-semibold">GitHub Actions</strong> son la base con la que trabajo.
+            Diseño arquitectura y me fijo en el detalle de la interfaz.
           </>
         ) : (
           <>
-            I’m <strong class="font-semibold">Andrés Sánchez</strong>, a full-stack developer in
-            León, Nicaragua. I study Cybernetic Electronic Engineering at ULSA.{' '}
+            I’m <strong class="font-semibold">Andrés Sánchez</strong>, a full-stack developer. I’m
+            based in León, Nicaragua, and I work with teams in Managua and with clients abroad: the
+            context changes, the engineering doesn’t. I study Cybernetic Electronic Engineering at
+            ULSA.{' '}
             <strong class="font-semibold text-[var(--route-hi)]">Go</strong> and{' '}
             <strong class="font-semibold text-[var(--route-hi)]">Astro</strong> are my daily
-            tools: I can’t live without <strong class="font-semibold">Docker</strong>, a VPS behind{' '}
-            <strong class="font-semibold">nginx</strong>, or{' '}
-            <strong class="font-semibold">GitHub Actions</strong> shipping clean deploys. I design
-            architecture and care about interface details.
+            tools; <strong class="font-semibold">Docker</strong> and a VPS behind{' '}
+            <strong class="font-semibold">nginx</strong>, shipped by{' '}
+            <strong class="font-semibold">GitHub Actions</strong>, are the baseline I work with. I
+            design architecture and care about interface details.
           </>
         )
       }
@@ -70,7 +74,7 @@ const portraitAlt = portraitFile
 
     <p class="mt-7 inline-flex items-center gap-2 rounded-full border border-[var(--outline-variant)] bg-[var(--elev-1)] px-3 py-1 font-[var(--font-mono)] text-[12px] text-[var(--ink-soft)]">
       <span class="h-2 w-2 rounded-full bg-[var(--jungle)]" aria-hidden="true"></span>
-      {es ? 'Disponible para freelance y open source' : 'Available for freelance and open source'}
+      {es ? 'Disponible para freelance y trabajo remoto' : 'Available for freelance and remote work'}
     </p>
 
     <div class="mt-4 flex flex-wrap gap-3">
@@ -79,7 +83,7 @@ const portraitAlt = portraitFile
         aria-label={es ? 'Enviar un correo a Andrés' : 'Email Andrés'}
         class="rounded-[var(--radius-s)] bg-[var(--route)] px-4 py-2 font-semibold text-[var(--bg)] no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:bg-[var(--route-hi)]"
         >
-        {es ? 'Escribíme' : 'Email me'}
+        {es ? 'Escríbeme' : 'Email me'}
       </a>
       <a
         href="https://github.com/D-Kale"
