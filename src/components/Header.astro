@@ -9,6 +9,7 @@ const { lang } = Astro.props;
 const other: Locale = lang === 'es' ? 'en' : 'es';
 const links = [
   { href: `${localePath[lang]}#ruta`, label: lang === 'es' ? 'ruta' : 'route' },
+  { href: `${localePath[lang]}#superpowers`, label: 'stack' },
   { href: `${localePath[lang]}#taller`, label: lang === 'es' ? 'taller' : 'workshop' },
   { href: `${localePath[lang]}#comunidad`, label: lang === 'es' ? 'comunidad' : 'community' },
   { href: `${localePath[lang]}#formacion`, label: lang === 'es' ? 'formación' : 'education' },

@@ -17,6 +17,14 @@ import {
   siFirebase,
   siResend,
   siHostinger,
+  siTypescript,
+  siJavascript,
+  siPhp,
+  siTailwindcss,
+  siGithubactions,
+  siLinux,
+  siGit,
+  siFastapi,
 } from 'simple-icons';
 
 export interface TechIcon {
@@ -48,6 +56,14 @@ export const techIcons: Record<string, TechIcon> = {
   Firebase: siFirebase,
   Resend: siResend,
   Hostinger: siHostinger,
+  TypeScript: siTypescript,
+  JavaScript: siJavascript,
+  PHP: siPhp,
+  'Tailwind CSS': siTailwindcss,
+  'GitHub Actions': siGithubactions,
+  Linux: siLinux,
+  Git: siGit,
+  FastAPI: siFastapi,
 };
 
 export function iconFor(label: string): TechIcon | undefined {

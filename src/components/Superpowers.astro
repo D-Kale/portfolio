@@ -1,0 +1,43 @@
+---
+import { skillGroups } from '../data/skills';
+import TechChip from './TechChip.astro';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'es' } = Astro.props;
+const es = lang === 'es';
+---
+
+<section id="superpowers" class="mt-[var(--space-xl)]" aria-labelledby="superpowers-title">
+  <h2 id="superpowers-title" class="text-3xl font-bold">
+    {es ? 'Superpoderes técnicos' : 'Tech superpowers'}
+  </h2>
+  <p class="mt-2 max-w-prose text-[var(--ink-soft)]">
+    {
+      es
+        ? 'Estas son las herramientas con las que trabajo: las que están en los repositorios, en los VPS y en los contenedores. Agrupadas por lo que hacen, no por cómo suenan en un CV.'
+        : 'These are the tools I work with: the ones in the repositories, on the VPSs and inside the containers. Grouped by what they do, not by how they read on a CV.'
+    }
+  </p>
+
+  <ul class="mt-6 grid gap-6 md:grid-cols-2">
+    {
+      skillGroups.map((g, i) => (
+        <li
+          class="reveal rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-1)] p-6"
+          style={`--i:${i}`}
+        >
+          <h3 class="text-lg font-bold">{g.title[lang]}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {g.items.map((s) => (
+              <TechChip name={s} />
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</section>

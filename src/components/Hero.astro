@@ -86,13 +86,34 @@ const portraitAlt = portraitFile
         {es ? 'Escríbeme' : 'Email me'}
       </a>
       <a
-        href="https://github.com/D-Kale"
-        aria-label="GitHub de Andrés"
+        href="https://github.com/D-Kale/portfolio"
+        aria-label={es ? 'Repositorio de GitHub de este portfolio' : 'GitHub repository for this portfolio'}
         class="rounded-[var(--radius-s)] border border-[var(--outline)] px-4 py-2 no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:bg-[var(--elev-2)] hover:text-[var(--ink)]"
       >
         GitHub
       </a>
     </div>
+
+    <a
+      href="#ruta"
+      class="mt-8 flex max-w-md items-start gap-3 rounded-[var(--radius-s)] border border-[var(--outline-variant)] bg-[var(--elev-1)] p-4 no-underline transition-colors duration-[var(--dur-short)] ease-[var(--ease-emphasized)] hover:border-[var(--route)] hover:bg-[var(--elev-2)]"
+    >
+      <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--route)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 5v14M6 13l6 6 6-6"></path>
+      </svg>
+      <span>
+        <span class="block font-semibold text-[var(--ink)]">
+          {es ? 'Abajo hay una ruta' : 'There is a route below'}
+        </span>
+        <span class="mt-1 block text-sm text-[var(--ink-soft)]">
+          {
+            es
+              ? '78 km de carrera dibujados como carretera: el camión avanza con tu scroll y cada parada tiene su historia.'
+              : '78 km of career drawn as a highway: the truck moves with your scroll and every stop has its own story.'
+          }
+        </span>
+      </span>
+    </a>
   </div>
   <div class="mx-auto w-56 md:w-full">
     <div class="overflow-hidden rounded-[var(--radius-m)] border border-[var(--outline-variant)] bg-[var(--elev-2)]">

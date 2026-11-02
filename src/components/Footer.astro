@@ -6,6 +6,7 @@ interface Props {
 const { lang = 'es' } = Astro.props;
 const year = new Date().getFullYear();
 const contact = lang === 'es' ? 'Contacto' : 'Contact';
+const profile = lang === 'es' ? 'Perfil' : 'Profile';
 const line =
   lang === 'es'
     ? 'Hecho en León, Nicaragua · Construyo sistemas y comunidades que aprenden, en León, en Managua y más allá.'
@@ -23,7 +24,8 @@ const line =
     <p class="text-xs">
       © {year} Andrés Sánchez ·
       <a class="underline" href="mailto:a3235633@gmail.com">{contact}</a> ·
-      <a class="underline" href="https://github.com/D-Kale" rel="me">GitHub</a> ·
+      <a class="underline" href="https://github.com/D-Kale/portfolio" rel="me">GitHub</a> ·
+      <a class="underline" href="https://github.com/D-Kale" rel="me">{profile}</a> ·
       <a class="underline" href="https://ni.linkedin.com/in/andressanchezsf" rel="me">LinkedIn</a>
     </p>
   </div>
