@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 22
+        - nvm use 22
+        - npm install -g pnpm@11
+        - pnpm config set store-dir .pnpm-store
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .pnpm-store/**/*
