@@ -22,9 +22,13 @@ Most portfolios are a list of projects. Mine is a road: my career as a **78 km h
 - **Skills / Tech Superpowers** → "Superpoderes técnicos": the real stack (Go, Python, TypeScript, PostgreSQL, Redis, Astro, React, Flutter, Docker, nginx, AWS, GitHub Actions) in four groups.
 - **Projects / Achievements** → "El taller": VoxLab (Hackathon Nicaragua), Waresis (multi-tenant ERP), go-storage (pkg.go.dev), ManualGestor, TEDx.
 
+![Sección "Superpoderes técnicos": el stack real en cuatro grupos](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/superpowers.webp)
+
 Spanish at `/`, English at `/en/`, persisted light/dark toggle, sticky header, mobile menu that closes on Escape.
 
 ## AWS setup
+
+![Amplify app overview: app id, region us-east-2, rama main desplegada con su dominio](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/aws-overview.webp)
 
 ![Amplify: deployment 3 deployed, con dominio, repositorio, commit y duración del build](https://raw.githubusercontent.com/D-Kale/portfolio/main/docs/hackathon/aws-deployments.webp)
 
