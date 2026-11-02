@@ -185,8 +185,9 @@ Alternativa descartada: mantener el popover y añadir el camión (dos modelos co
 | `RouteMap.astro` | `--surface-low` | 28px | Placa SVG (carretera en serpentina) + pines numerados + camión scroll-driven; sticky en escritorio y en móvil |
 | Tarjetas de parada (dentro de `RouteMap`) | `--elev-1` → `--elev-2` hover | 16px | Foto 16:9 + estado parada/mirador + copy real; ancla `#stop-{id}` con `tabindex="-1"` para que el foco salte a la tarjeta |
 | `Workshop.astro` | `--elev-1` → `--elev-2` | 16px | Banner 16:9 + chips con logo + `<details>` para la profundidad técnica + galería 3-up |
-| `CommunityEducation.astro` | `--elev-1` | 16px | Tarjetas de comunidad con foto 16:9; ULSA como tarjeta destacada; formación como filas con borde inferior + chip de estado |
-| `Cajuela.astro` (postales) | `--elev-1`, borde `--route`/30 | 16px | Reposo, cita 1px |
+| `CommunityEducation.astro` | `--elev-1` | 16px | Tarjetas de comunidad con foto 16:9; ULSA como tarjeta destacada; formación en grid de 2 columnas con logo en placa + chip de estado |
+| `Contact.astro` | `--elev-1` | 16px | Cierre con email, GitHub y LinkedIn + alcance internacional |
+| `Header.astro` | `--bg` + borde inferior | — | Sticky, nav mono uppercase, toggle de tema, chip de idioma, menú móvil y barra de progreso de scroll |
 | `Footer.astro` | `--surface-lowest` | — | Enlaces |
 
 **Dónde una superficie elevada reemplaza a la tarjeta plana:** tarjeta de proyecto activa, tarjeta de parada activa.

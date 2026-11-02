@@ -13,18 +13,17 @@ src/
     route.ts              Paradas y miradores del mapa (7 paradas: coords, foto, alt)
     routeCopy.ts          Copy de la ruta (ES/EN)
     projects.ts           Proyectos del taller (ES/EN)
-    postcards.ts          Postales estáticas de la cajuela
     community.ts          Comunidad y formación (ES/EN)
     tech.ts               Mapa etiqueta de stack -> logo simple-icons
   components/
-    Header.astro          Navegación + toggle ES/EN
+    Header.astro          Navegación sticky + menú móvil + toggle tema + toggle ES/EN
     Footer.astro          Pie de página
     Hero.astro            Introducción + retrato real + badge + enlaces
     RouteMap.astro        Placa SVG + pins numerados + camión scroll-driven + tarjetas ancla
     Workshop.astro        Proyectos destacados y secundarios
     CommunityEducation.astro  Comunidad + formación
+    Contact.astro         Cierre con email, GitHub y LinkedIn
     TechChip.astro        Chip de stack (logo simple-icons + texto)
-    Cajuela.astro         Postales de mentores y compañeros
   styles/
     tokens.css            Sistema de tokens (superficies M3, forma, motion)
     global.css            Capas base, estilos del mapa,details, animaciones
@@ -50,7 +49,7 @@ pnpm preview    # sirve la build localmente
 pnpm check      # astro check + TypeScript
 ```
 
-El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo **un script vanilla inline de 1,6 KB (0,8 KB gzip, sin librerías)** que mueve el camión por la carretera según el scroll. Todo en español por defecto; inglés en `/en` con `hreflang`.
+El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo **scripts vanilla inline (~3,8 KB raw, ~2 KB gzip, sin librerías)** que mueven el camión por la carretera según el scroll, animan la entrada de las tarjetas, controlan el menú móvil y el toggle de tema. Todo en español por defecto; inglés en `/en` con `hreflang`.
 
 ## Stack
 
@@ -60,7 +59,7 @@ El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo *
 | Estilos | CSS custom properties (tokens en `src/styles/tokens.css`) + `@layer base` para que las utilities de Tailwind ganen + `prefers-reduced-motion` |
 | Logos | `simple-icons` (imports nombrados, tree-shaking) — monocromos, self-host, sin CDN |
 | Idiomas | ES raíz + `/en` toggle (routing manual, sin dependencias) |
-| JavaScript | **mínimo**: un script vanilla inline (1,6 KB / 0,8 KB gzip, sin dependencias) para el camión scroll-driven y el resalte pin ↔ tarjeta. Sin hidratación, sin librerías, sin framework |
+| JavaScript | **mínimo**: scripts vanilla inline (~3,8 KB / ~2 KB gzip, sin dependencias) para el camión scroll-driven, el resalte pin ↔ tarjeta, el toggle de tema, el menú móvil y la animación de entrada. Sin hidratación, sin librerías, sin framework |
 | Calidad | `astro check`, pruebas de teclado, `prefers-reduced-motion`, Lighthouse |
 | Despliegue (pendiente tu orden) | GitHub → AWS Amplify Hosting (GitHub App, sin claves en repo) |
 | Backend (fase 2) | API Gateway HTTP + Lambda Go (`provided.al2023`) + DynamoDB on-demand |
@@ -71,7 +70,8 @@ El sitio se construye **estático**: cero servidor. Todo es HTML/CSS/SVG salvo *
 - **"Cartografía"**: mapa dibujado a mano (sin Mapbox/tiles) con paradas técnicas y miradores humanos (La Gritería, Virgen de la Merced, Museo Ortiz Gurdian).
 - **M3 de base fría + acento ámbar**: M3 como gramática de superficie, forma y movimiento; el ámbar solo tiñe superficies activas (`--elev-route`).
 - **La ruta es una carretera vertical en serpentina**: el camión avanza con el scroll (script vanilla, `path.getPointAtLength` + tangente), cada pin es un ancla a su parada y al activarlo el foco salta a la tarjeta.
-- **Sin backend todavía**: el portfolio es 100% estático. La API de postales (Go Lambda + DynamoDB + área visual `/admin` con JWT) queda como fase 2 documentada en `DECISIONS.md`, tras el deadline del AWS Student Builder Challenge.
+- **Sin backend todavía**: el portfolio es 100% estático. No hay contenido inventado: si una frase no tiene evidencia real en el repositorio, no se publica (por eso la Cajuela de frases ficticias salió y en su lugar quedó una sección de contacto honesta).
+- **Tema claro/oscuro**: toggle en el header, persistido en `localStorage`, con el tema aplicado antes del primer pintado (sin flash).
 - **Cero secretos en el repo**: ninguna clave; si llega la fase 2, variables de entorno en Amplify y `sam deploy` con el rol de IAM (nunca access keys).
 
 ## Las imágenes

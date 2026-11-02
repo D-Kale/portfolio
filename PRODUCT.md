@@ -33,17 +33,18 @@ El sitio no es un CV, no es una landing de servicios y no es una tienda. Es un d
 - Una sola página, en español en la raíz (`/`) y en inglés en `/en/`, con el mismo contenido y un toggle visible en el header.
 - Sitio 100% estático (Astro + Tailwind v4 + tokens CSS). Cero servidor en v1.
 - Despliegue previsto: GitHub → AWS Amplify Hosting, región us-east-2, sin claves en el repositorio. **Nada sale a GitHub ni a AWS hasta orden explícita de Andrés.**
-- Contexto actual: AWS Student Builder Challenge. La API de las postales (API Gateway + Lambda Go + DynamoDB + `/admin` con JWT) es fase 2 documentada, fuera del alcance de v1.
+- Contexto actual: AWS Student Builder Challenge. Toda capacidad serverless queda como fase 2 documentada, fuera del alcance de v1.
 - La web se consume en escritorio y en móvil, con lectura larga y scroll; el contenido es denso y narrativo, no transaccional.
 
 ## Capabilities and Constraints
 
 - Idioma: ES primero, EN como espejo completo. `hreflang` alternos y rutas manuales, sin dependencias de i18n.
 - Ruta dibujada a mano, sin tiles ni Mapbox: una placa SVG con la carretera en serpentina, un camión que avanza con el scroll (script vanilla mínimo) y **un solo camino de lectura** — los pines son anclas a las tarjetas y al activarlos el foco salta a la parada. Las tarjetas quedan como índice legible, imprimible y con URL compartible.
-- Los datos de contenido viven en `src/data/` (ruta, copy bilingüe, proyectos, comunidad, formación, postales, logos de stack). Todo el copy está duplicado ES/EN en la fuente: no hay archivos de traducción.
+- Los datos de contenido viven en `src/data/` (ruta, copy bilingüe, proyectos, comunidad, formación, logos de stack). Todo el copy está duplicado ES/EN en la fuente: no hay archivos de traducción.
 - Fotografías: las fotos reales ya están en `public/assets/` (WebP, 1400px, q80) y el retrato vive en `public/assets/portrait.webp`. `public/assets/manifest.json` inventaría cada archivo con su evento; `public/assets/README.md` documenta el criterio. Los recortes descartados se conservan **fuera** del deploy en `assets-review/`.
 - Logos de stack: `simple-icons` (CC0-1.0), self-host, monocromos. Sin logo en el catálogo → chip de texto; nunca un icono inventado.
-- Sin backend, sin base de datos, sin autenticación en v1. La Cajuela se alimenta de un JSON en el repositorio revisado en build.
+- Sin backend, sin base de datos, sin autenticación en v1. El contenido es estático y revisado en build.
+- Tema claro/oscuro con toggle en el header, persistido en `localStorage` y aplicado antes del primer pintado.
 - Sin secretos en el repositorio. IAM por rol en Amplify, nunca access keys.
 - Accesibilidad: navegación por teclado, skip link, foco visible (el foco sigue al ancla del pin), objetivo de toque mínimo de 24px, `prefers-reduced-motion` respetado.
 - La versión `/en` debe estar completa: no es un apéndice de la española.
@@ -53,7 +54,7 @@ El sitio no es un CV, no es una landing de servicios y no es una tienda. Es un d
 - Nombre: **Andrés Sánchez**.
 - Lema: *"I build modern systems and communities that learn."* / *"Brego sistemas modernos y comunidades que aprenden."*
 - **El español es la raíz, no una traducción.** El inglés abre la puerta a oportunidades internacionales como extra, nunca al revés.
-- El concepto **"Cartografía"** es el mundo visual del sitio: ruta, paradas, miradores, cajuela, Postal. No es decorativo, es la estructura del argumento.
+- El concepto **"Cartografía"** es el mundo visual del sitio: ruta, paradas, miradores y el cierre con contacto. No es decorativo, es la estructura del argumento.
 - Voz: directa, en primera persona, sin superlativos. Se admite lo que no es un case study ("lo presenté como aprendizaje"). La honestidad es parte de la marca.
 - Dirección tipográfica ya decidida y comprada: **Bricolage Grotesque** (display) + **IBM Plex Mono** (datos, etiquetas, metadatos).
 - Nunca inventar testimonios, clientes, métricas, precios, licencias ni afirmaciones de despliegue. Lo que no existe, no se cuenta.
@@ -65,7 +66,7 @@ Contenido real, ya escrito y con fuente en el repositorio:
 - **Proyectos** (`src/data/projects.ts`): VoxLab (startup en incubación, hackathon Kronox 2026), Waresis (ERP multi-tenant en construcción), go-storage (librería open source en pkg.go.dev), ManualGestor (aprendizaje), PythonSurveyAnalizer (investigación), TEDx Avenida Bolívar (consultoría), Programming Club ULSA (tooling interno). Dos de ellos marcados como destacados.
 - **Comunidad** (`src/data/community.ts`): Boreal Labs (staff y mentoría), Flutter Meetup Managua (charla), TechDay Nicaragua 2026, WordCamp Managua (staff, logística), TEDx (consultor), Hackathon Nicaragua (Kronox 2026).
 - **Formación** (`src/data/community.ts`): ULSA Cibernética Electrónica, Harvard CS50x (completado), CS50W (en proceso), Cisco IT Essentials (completado), Aspire (en curso), Inglés B2.
-- **Postales** (`src/data/postcards.ts`): tres postcards de mentores y compañeros con autor y sello.
+- **Cierre** (`src/components/Contact.astro`): email, GitHub y LinkedIn reales, con el alcance internacional declarado (León, Managua y trabajo remoto).
 - **Enlaces reales**: GitHub (`D-Kale`), LinkedIn (charla de hackathon), `tedxavenidabolivar.com`, pkg.go.dev.
 - **Fotografías reales**: retrato, ULSA, La Gritería, Museo Ortiz Gurdian, La Merced, Boreal Labs en la Hackathon, interfaz de VoxLab, TechDay, WordCamp, VoxLab stand y equipo.
 - Capturas de referencia en `docs/screenshots/`.

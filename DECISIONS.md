@@ -22,6 +22,7 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - **Décision**: v1 100% estática (Astro → Amplify). La Cajuela (postales de mentores) se alimenta de JSON en el repo, revisado en build. La API real (API Gateway HTTP + Lambda Go `provided.al2023` arm64 + DynamoDB + `/admin` visual con JWT + rate limit) queda documentada como **fase 2, después del deadline**.
 - **Por qué**: con 1–2 días, un backend a medias arriesga todo. Estático es hermético y ampliable. La tentación de "mostrar AWS de más" no vale un portfolio roto.
 - **Alternativa descartada**: meto la API sí o sí (riesgo alto de no llegar); guestbook sin moderación (spam) — descartado por seguridad.
+- **Estado**: la Cajuela como contenido ficticio quedó **retirada** el 2026-11-02 (ver más abajo). La API de fase 2 se mantiene como opción, pero solo con contenido real.
 
 ## 2026-10-28 · Trabajo local hasta orden explícita
 
@@ -104,8 +105,32 @@ Formato: fecha · decisión · por qué · alternativas descartadas.
 - **Por qué**: la evidencia de proyectos (VoxLab, Waresis) estaba a 7.058 px en móvil, 7,4 pantallas de scroll. Con el arreglo llega a 6.012 px (6,1 pantallas) y la ruta baja de 5.760 a 4.714 px. El hallazgo de fondo: los overrides móviles de `.ruta-stop` estaban escritos **antes** de las reglas base, así que en móvil ganaban `min-height: 70vh`, `align-items: center` y `scroll-margin-top: 4rem` — el `scroll-margin-top: calc(44svh + 1rem)` que evita que la parada quede bajo la placa fija **nunca estuvo activo** en móvil. Además había 458 px de espacio en blanco entre la placa y la primera tarjeta (la placa ya ocupa 371 px en flujo, más 405 px de `padding-top` redundante que se eliminó).
 - **Alternativas descartadas**: ocultar la foto de las paradas en móvil (es la evidencia y da color al camino); recortar el texto de las paradas (el copy es el argumento); bajar la placa de 44svh (es el elemento que firma la metáfora); tocar el ritmo de escritorio (la versión de dos columnas ya funciona: la evidencia está a 5,8 pantallas).
 
+## 2026-11-02 · Tema claro/oscuro con toggle y script anti-flash
+
+- **Decisión**: el sitio tiene dos temas. `tokens.css` mantiene el tema oscuro como base y define un bloque `[data-theme='light']` que reescribe superficies, tinta y acentos (`--route #b45309`, `--jungle #047857`, `--sky #1d4ed8`, `--logo-plate #e6e9f1`). Un script **inline** en `Base.astro` fija `data-theme` antes del primer pintado (localStorage `tema`, fallback `prefers-color-scheme`), y el toggle del header solo alterna el atributo + persiste.
+- **Por qué**: el tema oscuro es la marca (cartografía nocturna de León), pero un sitio de portfolio se consulta de día y en oficinas con luz. El script va inline a propósito: un `<script>` externo llegaría tarde y causaría un flash blanco.
+- **Alternativas descartadas**: `prefers-color-scheme` sin toggle (deja al visitante sin control); un `<script>` externo en `<head>` con `defer` (flash garantizado); dos builds separados (rompe el toggle en vivo y duplica el contenido).
+
+## 2026-11-02 · Header rediseñado: sticky, compacto y con menú móvil
+
+- **Decisión**: el header es `sticky top-0 z-50` con altura fija `--header-h: 3.5rem`, nombre + "LEÓN, NICARAGUA" en mono, nav de escritorio en mono uppercase, toggle de tema, chip de idioma y botón de menú en móvil con `aria-expanded`. Suma una barra de progreso de scroll de 2px en ámbar.
+- **Por qué**: el header viejo era una barra estática que ocupaba espacio y no indicaba dónde estabas en un documento largo. Sticky + progreso da posición sin agregar un elemento visual pesado.
+- **Alternativas descartadas**: barra de progreso con etiquetas (ruido visual); header que se encoge al hacer scroll (salto de layout y foco errático); menú móvil como overlay a pantalla completa (demasiado para 5 enlaces).
+
+## 2026-11-02 · La Cajuela sale: el sitio no inventa frases de terceros
+
+- **Decisión**: se eliminaron `src/components/Cajuela.astro` y `src/data/postcards.ts`. En su lugar existe `Contact.astro` (`id="contacto"`), una sección final honesta con email, GitHub y LinkedIn. El nav, `index.astro` y `en/index.astro` se actualizaron.
+- **Por qué**: la Cajuela era un bloque de frases atribuidas a mentores y compañeros que **no existen** en la evidencia del repositorio. El principio de "verdad antes que persuasión" manda: un texto decorativo inventado contamina todo el documento. Un CTA real dice más que tres frases bonitas que nadie escribió.
+- **Alternativas descartadas**: reescribir las frases como "reflexiones propias" (seguirían siendo citables como de terceros); dejarlas fuera del deploy pero en el repo (el repo es la fuente de verdad del challenge); mantener la sección con un placeholder visible (placeholder es una promesa rota).
+
+## 2026-11-02 · Alcance internacional explícito
+
+- **Decisión**: hero, sección de contacto y footer dicen León (base), Managua (equipos) y trabajo remoto (clientes fuera del país). El badge del hero pasó de "freelance y open source" a "freelance y trabajo remoto".
+- **Por qué**: la versión `/en` ya existía, pero el texto en español sugería que el trabajo se quedaba en el país. Decirlo de frente abre la puerta sin inventar clientes fuera del país.
+- **Alternativas descartadas**: una sección nueva de "servicios por país" (más copy, menos evidencia); quitar la referencia a Managua (es real: Flutter Meetup, TechDay, WordCamp).
+
 ## Pendientes documentados (fase 2, post-deadline)
 
-- API de postales: `POST /notas` (validación + rate limit por IP con TTL), `GET /notas` (aprobadas), `GET /health`.
+- API de notas (guestbook) sobre contenido real: `POST /notas` (validación + rate limit por IP con TTL), `GET /notas` (aprobadas), `GET /health`.
 - `/admin` visual: passphrase → JWT (HS256), cookie HttpOnly + SameSite, 15 min TTL, rate limit de login 5/15 min por IP, UI con dos listas (pendientes / aprobadas) y acciones aprobar/denegar/eliminar.
 - Despliegue del stack serverless vía `sam deploy` desde máquina local, con el perfil `aws-toolkit`.
